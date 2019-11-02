@@ -38,8 +38,8 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'blog/search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
       copy_button: '复制',
@@ -50,15 +50,15 @@
   };
 </script>
 
-  <meta name="description" content="关于我个人介绍UJS 计算机技术专业 研究生缺乏创新思维的老工科男努力在这个喧嚣的时代保持独立思考不喜欢被贴标签想成为有趣的人学习方向早年JAVA 开发者，现转大数据,python,云存储方向个人兴趣实况DOTA2常年混迹在高中的时候学业很忙碌,但是很喜欢去踢足球,现在踢得很少了喜好标签包括但不限于：bilibili、足球、实况、宫崎骏、柯南、夏目友人帐、千与千寻">
+  <meta name="description" content="关于我个人介绍UJS 计算机技术专业 研究生喜欢不断挑战自我和保持专注的状态努力在这个喧嚣的时代保持独立思考学习方向早年JAVA 开发者，目前转大数据,python,云存储方向个人兴趣实况DOTA2常年混迹在B站高中的时候学业很忙碌,但是很喜欢去踢足球,现在踢得很少了喜好标签包括但不限于：bilibili、足球、实况、纪录片、宫崎骏、柯南、夏目友人帐、千与千寻">
 <meta property="og:type" content="website">
 <meta property="og:title" content="about">
 <meta property="og:url" content="http:&#x2F;&#x2F;grainrain.github.io&#x2F;about&#x2F;index.html">
 <meta property="og:site_name" content="林 | Jason">
-<meta property="og:description" content="关于我个人介绍UJS 计算机技术专业 研究生缺乏创新思维的老工科男努力在这个喧嚣的时代保持独立思考不喜欢被贴标签想成为有趣的人学习方向早年JAVA 开发者，现转大数据,python,云存储方向个人兴趣实况DOTA2常年混迹在高中的时候学业很忙碌,但是很喜欢去踢足球,现在踢得很少了喜好标签包括但不限于：bilibili、足球、实况、宫崎骏、柯南、夏目友人帐、千与千寻">
+<meta property="og:description" content="关于我个人介绍UJS 计算机技术专业 研究生喜欢不断挑战自我和保持专注的状态努力在这个喧嚣的时代保持独立思考学习方向早年JAVA 开发者，目前转大数据,python,云存储方向个人兴趣实况DOTA2常年混迹在B站高中的时候学业很忙碌,但是很喜欢去踢足球,现在踢得很少了喜好标签包括但不限于：bilibili、足球、实况、纪录片、宫崎骏、柯南、夏目友人帐、千与千寻">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;ghchart.rshah.org&#x2F;grainrain">
-<meta property="og:updated_time" content="2019-10-31T04:02:22.000Z">
+<meta property="og:updated_time" content="2019-11-02T01:51:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;ghchart.rshah.org&#x2F;grainrain">
 
@@ -150,6 +150,11 @@
     <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
 
   </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
@@ -160,9 +165,34 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -204,16 +234,16 @@
       
       
       <div class="post-body">
-          <h1 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h1><h2 id="个人介绍"><a href="#个人介绍" class="headerlink" title="个人介绍"></a>个人介绍</h2><p>UJS 计算机技术专业 研究生<br>缺乏创新思维的老工科男<br>努力在这个喧嚣的时代保持独立思考<br>不喜欢被贴标签<br>想成为有趣的人</p><h2 id="学习方向"><a href="#学习方向" class="headerlink" title="学习方向"></a>学习方向</h2><p>早年JAVA 开发者，现转大数据,python,云存储方向</p><img src="https://ghchart.rshah.org/grainrain" alt="Github commit chart"><h2 id="个人兴趣"><a href="#个人兴趣" class="headerlink" title="个人兴趣"></a>个人兴趣</h2><p>实况<br>DOTA2<br>常年混迹在<br>高中的时候学业很忙碌,但是很喜欢去踢足球,现在踢得很少了</p><h2 id="喜好标签"><a href="#喜好标签" class="headerlink" title="喜好标签"></a>喜好标签</h2><p><strong>包括但不限于：</strong><br>bilibili、足球、实况、宫崎骏、柯南、夏目友人帐、千与千寻</p><a id="more"></a>
+          <h1 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h1><h2 id="个人介绍"><a href="#个人介绍" class="headerlink" title="个人介绍"></a>个人介绍</h2><p>UJS 计算机技术专业 研究生<br>喜欢不断挑战自我和保持专注的状态<br>努力在这个喧嚣的时代保持独立思考</p><h2 id="学习方向"><a href="#学习方向" class="headerlink" title="学习方向"></a>学习方向</h2><p>早年JAVA 开发者，目前转大数据,python,云存储方向</p><img src="https://ghchart.rshah.org/grainrain" alt="Github commit chart"><h2 id="个人兴趣"><a href="#个人兴趣" class="headerlink" title="个人兴趣"></a>个人兴趣</h2><p>实况<br>DOTA2<br>常年混迹在B站<br>高中的时候学业很忙碌,但是很喜欢去踢足球,现在踢得很少了</p><h2 id="喜好标签"><a href="#喜好标签" class="headerlink" title="喜好标签"></a>喜好标签</h2><p><strong>包括但不限于：</strong><br>bilibili、足球、实况、纪录片、宫崎骏、柯南、夏目友人帐、千与千寻</p><a id="more"></a>
 
 
 
 
 
-<h2 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h2><p>欢迎在评论区留下有建设性的评论<br>点击右下角通过  联系我<br>常用邮箱：<a href="mailto:lingfenglyy@gmail.com" target="_blank" rel="noopener">lingfenglyy@gmail.com</a></p>
+<h2 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h2><p>欢迎在评论区留下有建设性的评论<br>点击右下角通过  联系我<br>常用邮箱：<a href="mailto:igrainrain@163.com" target="_blank" rel="noopener">igrainrain@163.com</a></p>
 <h1 id="关于本博客"><a href="#关于本博客" class="headerlink" title="关于本博客"></a>关于本博客</h1><p>这个博客大概诞生于2019年10月，在经历了数次的犹豫和彷徨，决定用博客来记录工作和生活中的一些东西,并最终选择了 Next。</p>
-<p>尽管我的 SEO 优化的不是很好，搜索引擎很难定位到这里，但这里足够安静，我希望当你点进这个站点的时候，觉得它有点世外桃源的意味。</p>
-<p>很遗憾，将近一年的时间，你目前只能在这里看到个位数的文章，其原因有技术问题而造成的数据丢失，也是我懒散的性格所致。我曾经一度追求过写出具有独立思想的技术文章，到头来还是相关精华文章的知识总结，就像教材的作者前面总标着“编著”二字，就像音乐排行榜的部分创作人总是被称呼为“裁缝”。</p>
+<p>尽管SEO 优化的不是很好，搜索引擎很难定位到这里，但这里足够安静，我希望当你点进这个站点的时候，觉得它有点世外桃源的意味。</p>
+<p>很遗憾，将近一年的时间，你目前只能在这里看到个位数的文章，其原因有技术问题而造成的数据丢失，也是懒散的性格所致。曾经一度追求过写出具有独立思想的技术文章，到头来还是相关精华文章的知识总结，就像教材的作者前面总标着“编著”二字，就像音乐排行榜的部分创作人总是被称呼为“裁缝”。</p>
 <p>你有一壶才能倒出一杯。</p>
 <p>我逐渐发现，自己还很幼稚，无论从思想上讲还是技术上。所以很长一段时间我都会留下一些笔记性质的文章，它对读者不是很友好，当然比纯笔记更开放。发文章的频率会很高，现在这个博客，更像是我目前学习状况的详细体现。</p>
 <p>网络上的每个人都在浪潮中浮沉，每个人都希望能在登上一座岛后发现崖下秘籍，然后站在聚光灯下，得到形而上的成功。我必须提前告诉你，这座岛上没有这些东西，不过它也不是海市蜃楼，没那么玄乎其神，没准能为你的生活增添一些乐趣和惊喜。</p>
@@ -293,6 +323,18 @@
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
   </nav>
 </div>
   <div class="links-of-author motion-element">
@@ -300,7 +342,7 @@
         <a href="https://github.com/grainrain" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;grainrain" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:lingfenglyy@gmail.com" title="E-Mail &amp;rarr; mailto:lingfenglyy@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+        <a href="mailto:igrainrain@163.com" title="E-Mail &amp;rarr; mailto:igrainrain@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
   </div>
 
@@ -308,6 +350,28 @@
 
       </div>
 
+      
+      
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <!-- modify icon to fire by szw -->
+              <i class="fa fa-history fa-" aria-hidden="true"></i>
+              近期文章
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+              
+                <li>
+                  <a href="/" title="" target="_blank"></a>
+                </li>
+              
+            </ul>
+          </div>
+      
+
+
+
+      
     </div>
   </aside>
   <div id="sidebar-dimmer"></div>
@@ -387,6 +451,8 @@
 
 
 
+
+  <script src="/js/local-search.js"></script>
 
 
 
