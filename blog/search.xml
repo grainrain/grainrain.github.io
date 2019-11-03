@@ -26,25 +26,4 @@
         <tag>nodejs</tag>
       </tags>
   </entry>
-  <entry>
-    <title>安装Kibana实践经历</title>
-    <url>/2018/08/31/%E5%AE%89%E8%A3%85Kibana%E5%AE%9E%E8%B7%B5%E7%BB%8F%E5%8E%86/</url>
-    <content><![CDATA[<h2 id="解压组件包-kibana-6-4-0-linux-x86-64-tar-gz"><a href="#解压组件包-kibana-6-4-0-linux-x86-64-tar-gz" class="headerlink" title="解压组件包 kibana-6.4.0-linux-x86_64.tar.gz"></a>解压组件包 kibana-6.4.0-linux-x86_64.tar.gz</h2><h2 id="修改kibana的配置文件"><a href="#修改kibana的配置文件" class="headerlink" title="修改kibana的配置文件"></a>修改kibana的配置文件</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd /opt/elk/kibana-6.4.0-linux-x86_64/config</span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim kibana.yml</span><br></pre></td></tr></table></figure><figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="meta">server.port</span>: <span class="string">5601 </span></span><br><span class="line"><span class="meta">server.host</span>: <span class="string">"0.0.0.0" </span></span><br><span class="line"><span class="meta">elasticsearch.url</span>: <span class="string">"http://192.168.179.129:9200" </span></span><br><span class="line"><span class="meta">kibana.index</span>: <span class="string">".kibana"</span></span><br></pre></td></tr></table></figure><a id="more"></a>
-
-
-
-
-
-
-
-<h2 id="启动kibana-（普通用户elk）"><a href="#启动kibana-（普通用户elk）" class="headerlink" title="启动kibana （普通用户elk）"></a>启动kibana （普通用户elk）</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nohup  ./bin/kibana &amp;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Bigdata</category>
-        <category>ELK</category>
-      </categories>
-      <tags>
-        <tag>ELK</tag>
-        <tag>kibana</tag>
-      </tags>
-  </entry>
 </search>
