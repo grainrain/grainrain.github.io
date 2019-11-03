@@ -291,6 +291,95 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://grainrain.github.io/2018/08/31/%E5%AE%89%E8%A3%85Kibana%E5%AE%9E%E8%B7%B5%E7%BB%8F%E5%8E%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yongyi Lin">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="林 | Jason">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/08/31/%E5%AE%89%E8%A3%85Kibana%E5%AE%9E%E8%B7%B5%E7%BB%8F%E5%8E%86/" class="post-title-link" itemprop="url">安装Kibana实践经历</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-08-31 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-31T00:00:00+08:00">2018-08-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-02 13:40:06" itemprop="dateModified" datetime="2019-11-02T13:40:06+08:00">2019-11-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bigdata/" itemprop="url" rel="index">
+                    <span itemprop="name">Bigdata</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bigdata/ELK/" itemprop="url" rel="index">
+                    <span itemprop="name">ELK</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="解压组件包-kibana-6-4-0-linux-x86-64-tar-gz"><a href="#解压组件包-kibana-6-4-0-linux-x86-64-tar-gz" class="headerlink" title="解压组件包 kibana-6.4.0-linux-x86_64.tar.gz"></a>解压组件包 kibana-6.4.0-linux-x86_64.tar.gz</h2><h2 id="修改kibana的配置文件"><a href="#修改kibana的配置文件" class="headerlink" title="修改kibana的配置文件"></a>修改kibana的配置文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/elk/kibana-6.4.0-linux-x86_64/config</span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim kibana.yml</span><br></pre></td></tr></table></figure><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">server.port</span>: <span class="string">5601 </span></span><br><span class="line"><span class="meta">server.host</span>: <span class="string">"0.0.0.0" </span></span><br><span class="line"><span class="meta">elasticsearch.url</span>: <span class="string">"http://192.168.179.129:9200" </span></span><br><span class="line"><span class="meta">kibana.index</span>: <span class="string">".kibana"</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/08/31/%E5%AE%89%E8%A3%85Kibana%E5%AE%9E%E8%B7%B5%E7%BB%8F%E5%8E%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -338,20 +427,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -379,6 +468,10 @@
             </div>
             <ul class="links-of-blogroll-list">
               
+              
+                <li>
+                  <a href="/" title="" target="_blank"></a>
+                </li>
               
                 <li>
                   <a href="/" title="" target="_blank"></a>
