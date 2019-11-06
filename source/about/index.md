@@ -40,7 +40,7 @@ bilibili、足球、实况、纪录片、宫崎骏、柯南、夏目友人帐、
 
 欢迎在评论区留下有建设性的评论
 点击右下角通过  联系我
-常用邮箱：igrainrain@163.com
+常用邮箱：lingfenglyy@gmail.com
 
 # 关于本博客
 
