@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="林 | JASON" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Surpervisor介绍 官方链接 Supervisor. 官方介绍 1Supervisor is a client&#x2F;server system that allows its users to monitor and control a number of processes on UNIX-like operating systems. 环境说明 Python版本12.7.5 操作系统123">
+<meta name="keywords" content="Supervisor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Supervisor使用">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;12&#x2F;Supervisor%E4%BD%BF%E7%94%A8&#x2F;index.html">
+<meta property="og:site_name" content="林 | JASON">
+<meta property="og:description" content="Surpervisor介绍 官方链接 Supervisor. 官方介绍 1Supervisor is a client&#x2F;server system that allows its users to monitor and control a number of processes on UNIX-like operating systems. 环境说明 Python版本12.7.5 操作系统123">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-13T09:26:16.000Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/11/12/Supervisor%E4%BD%BF%E7%94%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Supervisor使用 | 林 | JASON</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">林 | JASON</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/12/Supervisor%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yongyi Lin">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="林 | JASON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Supervisor使用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-12 09:16:13" itemprop="dateCreated datePublished" datetime="2019-11-12T09:16:13+08:00">2019-11-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-13 17:26:16" itemprop="dateModified" datetime="2019-11-13T17:26:16+08:00">2019-11-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/11/12/Supervisor%E4%BD%BF%E7%94%A8/" class="post-meta-item leancloud_visitors" data-flag-title="Supervisor使用" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/11/12/Supervisor%E4%BD%BF%E7%94%A8/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/12/Supervisor%E4%BD%BF%E7%94%A8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Surpervisor介绍"><a href="#Surpervisor介绍" class="headerlink" title="Surpervisor介绍"></a>Surpervisor介绍</h2><ul>
+<li>官方链接 <a href="http://supervisord.org/" target="_blank" rel="noopener" title="Supervisor: A Process Control System">Supervisor</a>.</li>
+<li>官方介绍 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Supervisor is a client/server system that allows its users to monitor and control a number of processes on UNIX-like operating systems.</span><br></pre></td></tr></table></figure>
+<h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2></li>
+<li>Python版本<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2.7.5</span><br></pre></td></tr></table></figure></li>
+<li>操作系统<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Distributor ID:	CentOS</span><br><span class="line">Description:	CentOS Linux release 7.6.1810 (Core) </span><br><span class="line">Release:	7.6.1810</span><br><span class="line">Codename:	Core</span><br></pre></td></tr></table></figure>
+<h2 id="Surpervisor安装"><a href="#Surpervisor安装" class="headerlink" title="Surpervisor安装"></a>Surpervisor安装</h2><h3 id="1-Pip在线安装"><a href="#1-Pip在线安装" class="headerlink" title="1.Pip在线安装"></a>1.Pip在线安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install supervisor</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul><a id="more"></a>
+<h3 id="2-发布包安装-centos为例"><a href="#2-发布包安装-centos为例" class="headerlink" title="2.发布包安装(centos为例)"></a>2.发布包安装(centos为例)</h3><ul>
+<li><p>yum install 的方式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y supervisor</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>easy_install的方式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install -y python-setuptools</span><br><span class="line">easy_install supervisor</span><br><span class="line">echo_supervisord_conf &gt; /etc/supervisord.conf</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="Surpervisor配置"><a href="#Surpervisor配置" class="headerlink" title="Surpervisor配置"></a>Surpervisor配置</h2><h3 id="默认supervisord配置"><a href="#默认supervisord配置" class="headerlink" title="默认supervisord配置"></a>默认supervisord配置</h3><p>1.查看默认配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo_supervisord_conf</span><br></pre></td></tr></table></figure>
+<p>2.yum install方式安装 以下文件和目录会自动生成,如果没有,请自行创建</p>
+<blockquote>
+<p>/etc/supervisord.conf<br>/etc/supervisord.d</p>
+</blockquote>
+<p>3.在 /etc/supervisord.d下创建conf和log两个目录,用于存储管理进程配置文件和日志文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/supervisord.d</span><br><span class="line">mkdir conf log</span><br></pre></td></tr></table></figure>
+<p>4.修改/etc/supervisord.conf的[include]</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/supervisord.conf</span><br></pre></td></tr></table></figure>
+
+<p>5.将/etc/supervisord.d/conf目录所用应用配置包含进来</p>
+<blockquote>
+<p>[include]<br>files = supervisord.d/conf/*.conf</p>
+</blockquote>
+<h3 id="应用配置"><a href="#应用配置" class="headerlink" title="应用配置"></a>应用配置</h3><p><code>需要说明的是 在启动Nginx命令需要增加daemon off参数</code></p>
+<p>创建nginx.conf配置文件,内容如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[program:nginx]</span><br><span class="line">directory = /usr/local/nginx/sbin ; 程序的启动目录</span><br><span class="line">command = /usr/local/nginx/sbin/nginx -g 'daemon off;' </span><br><span class="line">autostart = true     ; 在 supervisord 启动的时候也自动启动</span><br><span class="line">startsecs = 5        ; 启动 5 秒后没有异常退出，就当作已经正常启动了</span><br><span class="line">autorestart = true   ; 程序异常退出后自动重启</span><br><span class="line">startretries = 3     ; 启动失败自动重试次数，默认是 3</span><br><span class="line">user = root          ; 用哪个用户启动</span><br><span class="line">redirect_stderr = true  ; 把 stderr 重定向到 stdout，默认 false</span><br><span class="line">stdout_logfile_maxbytes = 20MB  ; stdout 日志文件大小，默认 50MB</span><br><span class="line">stdout_logfile_backups = 20     ; stdout 日志文件备份数</span><br><span class="line">; stdout 日志文件，需要注意当指定目录不存在时无法正常启动，所以需要手动创建目录（supervisord 会自动创建日志文件）</span><br><span class="line">stdout_logfile = /etc/supervisord.d/log/nginx.log  ;日志统一放在log目录下</span><br><span class="line">; 可以通过 environment 来添加需要的环境变量，一种常见的用法是修改 PYTHONPATH</span><br><span class="line">; environment=PYTHONPATH=$PYTHONPATH:/path/to/somewhere</span><br></pre></td></tr></table></figure>
+
+<h2 id="Surpervisor启动"><a href="#Surpervisor启动" class="headerlink" title="Surpervisor启动"></a>Surpervisor启动</h2><ul>
+<li><p>方式一</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> supervisord二进制启动</span></span><br><span class="line">supervisord -c /etc/supervisord.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"> 检查进程</span></span><br><span class="line">ps aux | grep supervisord</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方式二</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> /etc/rc.d/init.d/supervisord</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Supervisor is a client/server system that</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> allows its users to monitor and control a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> number of processes on UNIX-like operating</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> systems.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> chkconfig: - 64 36</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> description: Supervisor Server</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> processname: supervisord</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Source init <span class="built_in">functions</span></span></span><br><span class="line">. /etc/rc.d/init.d/functions</span><br><span class="line"></span><br><span class="line">prog="supervisord"</span><br><span class="line"></span><br><span class="line">prefix="/usr"</span><br><span class="line">exec_prefix="$&#123;prefix&#125;"</span><br><span class="line">prog_bin="$&#123;exec_prefix&#125;/bin/supervisord"</span><br><span class="line">PIDFILE="/var/run/$prog.pid"</span><br><span class="line"></span><br><span class="line">start()</span><br><span class="line">&#123;</span><br><span class="line">       echo -n $"Starting $prog: "</span><br><span class="line">       daemon $prog_bin --pidfile $PIDFILE -c /etc/supervisord.conf</span><br><span class="line">       [ -f $PIDFILE ] &amp;&amp; success $"$prog startup" || failure $"$prog startup"</span><br><span class="line">       echo</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">stop()</span><br><span class="line">&#123;</span><br><span class="line">       echo -n $"Shutting down $prog: "</span><br><span class="line">       [ -f $PIDFILE ] &amp;&amp; killproc $prog || success $"$prog shutdown"</span><br><span class="line">       echo</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">case "$1" in</span><br><span class="line"></span><br><span class="line"> start)</span><br><span class="line">   start</span><br><span class="line"> ;;</span><br><span class="line"></span><br><span class="line"> stop)</span><br><span class="line">   stop</span><br><span class="line"> ;;</span><br><span class="line"></span><br><span class="line"> status)</span><br><span class="line">       status $prog</span><br><span class="line"> ;;</span><br><span class="line"></span><br><span class="line"> restart)</span><br><span class="line">   stop</span><br><span class="line">   start</span><br><span class="line"> ;;</span><br><span class="line"></span><br><span class="line"> *)</span><br><span class="line">   echo "Usage: $0 &#123;start|stop|restart|status&#125;"</span><br><span class="line"> ;;</span><br><span class="line"></span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="supervisorctl-amp-supervisord"><a href="#supervisorctl-amp-supervisord" class="headerlink" title="supervisorctl&amp;supervisord"></a>supervisorctl&amp;supervisord</h2><h3 id="supervisorctl"><a href="#supervisorctl" class="headerlink" title="supervisorctl"></a>supervisorctl</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">supervisorctl stop programxxx，停止某一个进程(programxxx)，programxxx 为[program:beepkg] 里配置的值，这个示例就是 beepkg。  </span><br><span class="line">supervisorctl start programxxx，启动某个进程。  </span><br><span class="line">supervisorctl restart programxxx，重启某个进程。  </span><br><span class="line">supervisorctl status，查看进程状态。  </span><br><span class="line">supervisorctl stop groupworker ，重启所有属于名为 groupworker 这个分组的进程(start,restart 同理)。  </span><br><span class="line">supervisorctl stop all，停止全部进程，注：start、restart、stop 都不会载入最新的配置文件。  </span><br><span class="line">supervisorctl reload，载入最新的配置文件，停止原有进程并按新的配置启动、管理所有进程。  </span><br><span class="line">supervisorctl update，根据最新的配置文件，启动新配置或有改动的进程，配置没有改动的进程不会受影响而重启。</span><br></pre></td></tr></table></figure>
+<h3 id="supervisord"><a href="#supervisord" class="headerlink" title="supervisord"></a>supervisord</h3><p>supervisord，初始启动 Supervisord，启动、管理配置中设置的进程</p>
+<h2 id="Supervisor控制台"><a href="#Supervisor控制台" class="headerlink" title="Supervisor控制台"></a>Supervisor控制台</h2><p>在/etc/supervisord.conf中修改[inet_http_server]的参数，具体如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[inet_http_server]         ; inet (TCP) server disabled by default</span><br><span class="line">port=*:9001        ; ip_address:port specifier, *:port for all iface</span><br><span class="line">username=root             ; default is no username (open server)</span><br><span class="line">password=xxxx               ; default is no password (open server)</span><br></pre></td></tr></table></figure>
+
+<p>修改后重启supervisor进程，在浏览器访问 http://<host-ip>:9001</host-ip></p>
+<p>参考：<br><a href="http://supervisord.org/" target="_blank" rel="noopener">http://supervisord.org/</a><br><a href="https://blog.csdn.net/huwh_/article/details/80497790" target="_blank" rel="noopener">https://blog.csdn.net/huwh_/article/details/80497790</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Supervisor/" rel="tag"># Supervisor</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/10/31/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85Nodejs/" rel="next" title="Linux系统安装Nodejs">
+                  <i class="fa fa-chevron-left"></i> Linux系统安装Nodejs
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Surpervisor介绍"><span class="nav-number">1.</span> <span class="nav-text">Surpervisor介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境说明"><span class="nav-number">2.</span> <span class="nav-text">环境说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Surpervisor安装"><span class="nav-number">3.</span> <span class="nav-text">Surpervisor安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Pip在线安装"><span class="nav-number">3.1.</span> <span class="nav-text">1.Pip在线安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-发布包安装-centos为例"><span class="nav-number">3.2.</span> <span class="nav-text">2.发布包安装(centos为例)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Surpervisor配置"><span class="nav-number">4.</span> <span class="nav-text">Surpervisor配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#默认supervisord配置"><span class="nav-number">4.1.</span> <span class="nav-text">默认supervisord配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用配置"><span class="nav-number">4.2.</span> <span class="nav-text">应用配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Surpervisor启动"><span class="nav-number">5.</span> <span class="nav-text">Surpervisor启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#supervisorctl-amp-supervisord"><span class="nav-number">6.</span> <span class="nav-text">supervisorctl&amp;supervisord</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#supervisorctl"><span class="nav-number">6.1.</span> <span class="nav-text">supervisorctl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#supervisord"><span class="nav-number">6.2.</span> <span class="nav-text">supervisord</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Supervisor控制台"><span class="nav-number">7.</span> <span class="nav-text">Supervisor控制台</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Yongyi Lin"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Yongyi Lin</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grainrain" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;grainrain" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/mailto:lingfenglyy@gmail.com" title="E-Mail &amp;rarr; mailto:lingfenglyy@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yongyi Lin</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  </div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: true,
+    appId: 'dU3AocxWulnzN8DNg0bTw829-gzGzoHsz',
+    appKey: 'jSes7ppnweW70KLQJjGUd15q',
+    placeholder: "欢饮留言,留下你的邮箱,有回复就回提醒你~(邮箱不会被公开)",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: 'zh-cn' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

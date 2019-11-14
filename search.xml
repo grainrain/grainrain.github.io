@@ -1,6 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Supervisor使用</title>
+    <url>/2019/11/12/Supervisor%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="Surpervisor介绍"><a href="#Surpervisor介绍" class="headerlink" title="Surpervisor介绍"></a>Surpervisor介绍</h2><ul>
+<li>官方链接 <a href="http://supervisord.org/" target="_blank" rel="noopener" title="Supervisor: A Process Control System">Supervisor</a>.</li>
+<li>官方介绍 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Supervisor is a client/server system that allows its users to monitor and control a number of processes on UNIX-like operating systems.</span><br></pre></td></tr></table></figure>
+<h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2></li>
+<li>Python版本<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">2.7.5</span><br></pre></td></tr></table></figure></li>
+<li>操作系统<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Distributor ID:	CentOS</span><br><span class="line">Description:	CentOS Linux release 7.6.1810 (Core) </span><br><span class="line">Release:	7.6.1810</span><br><span class="line">Codename:	Core</span><br></pre></td></tr></table></figure>
+<h2 id="Surpervisor安装"><a href="#Surpervisor安装" class="headerlink" title="Surpervisor安装"></a>Surpervisor安装</h2><h3 id="1-Pip在线安装"><a href="#1-Pip在线安装" class="headerlink" title="1.Pip在线安装"></a>1.Pip在线安装</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pip install supervisor</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul><a id="more"></a>
+<h3 id="2-发布包安装-centos为例"><a href="#2-发布包安装-centos为例" class="headerlink" title="2.发布包安装(centos为例)"></a>2.发布包安装(centos为例)</h3><ul>
+<li><p>yum install 的方式</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y supervisor</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>easy_install的方式</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y python-setuptools</span><br><span class="line">easy_install supervisor</span><br><span class="line">echo_supervisord_conf &gt; /etc/supervisord.conf</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="Surpervisor配置"><a href="#Surpervisor配置" class="headerlink" title="Surpervisor配置"></a>Surpervisor配置</h2><h3 id="默认supervisord配置"><a href="#默认supervisord配置" class="headerlink" title="默认supervisord配置"></a>默认supervisord配置</h3><p>1.查看默认配置</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo_supervisord_conf</span><br></pre></td></tr></table></figure>
+<p>2.yum install方式安装 以下文件和目录会自动生成,如果没有,请自行创建</p>
+<blockquote>
+<p>/etc/supervisord.conf<br>/etc/supervisord.d</p>
+</blockquote>
+<p>3.在 /etc/supervisord.d下创建conf和log两个目录,用于存储管理进程配置文件和日志文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd /etc/supervisord.d</span><br><span class="line">mkdir conf log</span><br></pre></td></tr></table></figure>
+<p>4.修改/etc/supervisord.conf的[include]</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /etc/supervisord.conf</span><br></pre></td></tr></table></figure>
+
+<p>5.将/etc/supervisord.d/conf目录所用应用配置包含进来</p>
+<blockquote>
+<p>[include]<br>files = supervisord.d/conf/*.conf</p>
+</blockquote>
+<h3 id="应用配置"><a href="#应用配置" class="headerlink" title="应用配置"></a>应用配置</h3><p><code>需要说明的是 在启动Nginx命令需要增加daemon off参数</code></p>
+<p>创建nginx.conf配置文件,内容如下</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[program:nginx]</span><br><span class="line">directory = /usr/local/nginx/sbin ; 程序的启动目录</span><br><span class="line">command = /usr/local/nginx/sbin/nginx -g 'daemon off;' </span><br><span class="line">autostart = true     ; 在 supervisord 启动的时候也自动启动</span><br><span class="line">startsecs = 5        ; 启动 5 秒后没有异常退出，就当作已经正常启动了</span><br><span class="line">autorestart = true   ; 程序异常退出后自动重启</span><br><span class="line">startretries = 3     ; 启动失败自动重试次数，默认是 3</span><br><span class="line">user = root          ; 用哪个用户启动</span><br><span class="line">redirect_stderr = true  ; 把 stderr 重定向到 stdout，默认 false</span><br><span class="line">stdout_logfile_maxbytes = 20MB  ; stdout 日志文件大小，默认 50MB</span><br><span class="line">stdout_logfile_backups = 20     ; stdout 日志文件备份数</span><br><span class="line">; stdout 日志文件，需要注意当指定目录不存在时无法正常启动，所以需要手动创建目录（supervisord 会自动创建日志文件）</span><br><span class="line">stdout_logfile = /etc/supervisord.d/log/nginx.log  ;日志统一放在log目录下</span><br><span class="line">; 可以通过 environment 来添加需要的环境变量，一种常见的用法是修改 PYTHONPATH</span><br><span class="line">; environment=PYTHONPATH=$PYTHONPATH:/path/to/somewhere</span><br></pre></td></tr></table></figure>
+
+<h2 id="Surpervisor启动"><a href="#Surpervisor启动" class="headerlink" title="Surpervisor启动"></a>Surpervisor启动</h2><ul>
+<li><p>方式一</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> supervisord二进制启动</span></span><br><span class="line">supervisord -c /etc/supervisord.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"> 检查进程</span></span><br><span class="line">ps aux | grep supervisord</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方式二</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> /etc/rc.d/init.d/supervisord</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Supervisor is a client/server system that</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> allows its users to monitor and control a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> number of processes on UNIX-like operating</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> systems.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> chkconfig: - 64 36</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> description: Supervisor Server</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> processname: supervisord</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Source init <span class="built_in">functions</span></span></span><br><span class="line">. /etc/rc.d/init.d/functions</span><br><span class="line"></span><br><span class="line">prog="supervisord"</span><br><span class="line"></span><br><span class="line">prefix="/usr"</span><br><span class="line">exec_prefix="$&#123;prefix&#125;"</span><br><span class="line">prog_bin="$&#123;exec_prefix&#125;/bin/supervisord"</span><br><span class="line">PIDFILE="/var/run/$prog.pid"</span><br><span class="line"></span><br><span class="line">start()</span><br><span class="line">&#123;</span><br><span class="line">       echo -n $"Starting $prog: "</span><br><span class="line">       daemon $prog_bin --pidfile $PIDFILE -c /etc/supervisord.conf</span><br><span class="line">       [ -f $PIDFILE ] &amp;&amp; success $"$prog startup" || failure $"$prog startup"</span><br><span class="line">       echo</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">stop()</span><br><span class="line">&#123;</span><br><span class="line">       echo -n $"Shutting down $prog: "</span><br><span class="line">       [ -f $PIDFILE ] &amp;&amp; killproc $prog || success $"$prog shutdown"</span><br><span class="line">       echo</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">case "$1" in</span><br><span class="line"></span><br><span class="line"> start)</span><br><span class="line">   start</span><br><span class="line"> ;;</span><br><span class="line"></span><br><span class="line"> stop)</span><br><span class="line">   stop</span><br><span class="line"> ;;</span><br><span class="line"></span><br><span class="line"> status)</span><br><span class="line">       status $prog</span><br><span class="line"> ;;</span><br><span class="line"></span><br><span class="line"> restart)</span><br><span class="line">   stop</span><br><span class="line">   start</span><br><span class="line"> ;;</span><br><span class="line"></span><br><span class="line"> *)</span><br><span class="line">   echo "Usage: $0 &#123;start|stop|restart|status&#125;"</span><br><span class="line"> ;;</span><br><span class="line"></span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="supervisorctl-amp-supervisord"><a href="#supervisorctl-amp-supervisord" class="headerlink" title="supervisorctl&amp;supervisord"></a>supervisorctl&amp;supervisord</h2><h3 id="supervisorctl"><a href="#supervisorctl" class="headerlink" title="supervisorctl"></a>supervisorctl</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">supervisorctl stop programxxx，停止某一个进程(programxxx)，programxxx 为[program:beepkg] 里配置的值，这个示例就是 beepkg。  </span><br><span class="line">supervisorctl start programxxx，启动某个进程。  </span><br><span class="line">supervisorctl restart programxxx，重启某个进程。  </span><br><span class="line">supervisorctl status，查看进程状态。  </span><br><span class="line">supervisorctl stop groupworker ，重启所有属于名为 groupworker 这个分组的进程(start,restart 同理)。  </span><br><span class="line">supervisorctl stop all，停止全部进程，注：start、restart、stop 都不会载入最新的配置文件。  </span><br><span class="line">supervisorctl reload，载入最新的配置文件，停止原有进程并按新的配置启动、管理所有进程。  </span><br><span class="line">supervisorctl update，根据最新的配置文件，启动新配置或有改动的进程，配置没有改动的进程不会受影响而重启。</span><br></pre></td></tr></table></figure>
+<h3 id="supervisord"><a href="#supervisord" class="headerlink" title="supervisord"></a>supervisord</h3><p>supervisord，初始启动 Supervisord，启动、管理配置中设置的进程</p>
+<h2 id="Supervisor控制台"><a href="#Supervisor控制台" class="headerlink" title="Supervisor控制台"></a>Supervisor控制台</h2><p>在/etc/supervisord.conf中修改[inet_http_server]的参数，具体如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[inet_http_server]         ; inet (TCP) server disabled by default</span><br><span class="line">port=*:9001        ; ip_address:port specifier, *:port for all iface</span><br><span class="line">username=root             ; default is no username (open server)</span><br><span class="line">password=xxxx               ; default is no password (open server)</span><br></pre></td></tr></table></figure>
+
+<p>修改后重启supervisor进程，在浏览器访问 http://<host-ip>:9001</host-ip></p>
+<p>参考：<br><a href="http://supervisord.org/" target="_blank" rel="noopener">http://supervisord.org/</a><br><a href="https://blog.csdn.net/huwh_/article/details/80497790" target="_blank" rel="noopener">https://blog.csdn.net/huwh_/article/details/80497790</a></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Supervisor</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux系统安装Nodejs</title>
     <url>/2019/10/31/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85Nodejs/</url>
     <content><![CDATA[<h2 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h2><p>1.下载地址 : <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a></p>
