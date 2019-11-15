@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Git多账号配置</title>
+    <url>/2019/11/15/Git%E5%A4%9A%E8%B4%A6%E5%8F%B7%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h2 id="1-生成新的-SSH-keys"><a href="#1-生成新的-SSH-keys" class="headerlink" title="1.生成新的 SSH keys"></a>1.生成新的 SSH keys</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -f ~/.ssh/id_rsa.github -C "xxxx@163.com"</span><br><span class="line">ssh-keygen -t rsa -f ~/.ssh/id_rsa.gitee -C "xxxx@163.com"</span><br><span class="line">ssh-keygen -t rsa -f ~/.ssh/id_rsa.gitlab -C "xxxx@163.net"</span><br></pre></td></tr></table></figure><a id="more"></a>
+<h2 id="2-多账号必须配置-config-文件-重点"><a href="#2-多账号必须配置-config-文件-重点" class="headerlink" title="2.多账号必须配置 config 文件(重点)"></a>2.多账号必须配置 config 文件(重点)</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> touch ~/.ssh/config</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-config-里需要填的内容"><a href="#3-config-里需要填的内容" class="headerlink" title="3.config 里需要填的内容"></a>3.config 里需要填的内容</h2><pre><code class="shell"><span class="meta">#</span><span class="bash">Default gitHub user Self</span>
+Host github.com
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa.github
+
+<span class="meta">#</span><span class="bash"> gitee</span>
+    Host gitee.com
+    HostName gitee.com
+    User git
+    IdentityFile ~/.ssh/id_rsa.gitee
+
+
+<span class="meta">#</span><span class="bash">Add gitLab user </span>
+    Host git@DiEP-Infra
+    HostName DiEP-Infra
+    IdentityFile ~/.ssh/id_rsa.gitlab</code></pre>
+<h2 id="4-在-github-和-gitlab-网站添加-ssh"><a href="#4-在-github-和-gitlab-网站添加-ssh" class="headerlink" title="4.在 github 和 gitlab 网站添加 ssh"></a>4.在 github 和 gitlab 网站添加 ssh</h2><p>拷贝的~/.ssh/id_rsa.xxx.pub文件内容粘帖到 key 一栏，在点击 “add key” 按钮就可以了。</p>
+<p><a href="https://gitee.com/profile/sshkeys" target="_blank" rel="noopener">https://gitee.com/profile/sshkeys</a><br><a href="https://github.com/settings/keys" target="_blank" rel="noopener">https://github.com/settings/keys</a></p>
+<h2 id="5-测试是否连接成功"><a href="#5-测试是否连接成功" class="headerlink" title="5.测试是否连接成功"></a>5.测试是否连接成功</h2><pre><code class="shell">ssh -T git@github.com
+ssh -T  git@gitLab-host
+ssh -T git@gitee.com</code></pre>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+        <tag>Github</tag>
+        <tag>Gitee</tag>
+        <tag>Gitlab`</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决Vultr CentOS7主机禁用80端口问题</title>
+    <url>/2019/11/15/%E8%A7%A3%E5%86%B3Vultr%20CentOS7%E4%B8%BB%E6%9C%BA%E7%A6%81%E7%94%A880%E7%AB%AF%E5%8F%A3%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>在VULTR centOS7上安装了Nginx，无法访问Nginx初始化页面。</p><p>查询资料后发现应该是防火墙禁了80端口，解禁后页面访问正常,以下为操作步骤</p><h2 id="1-查看防火墙版本号"><a href="#1-查看防火墙版本号" class="headerlink" title="1.查看防火墙版本号"></a>1.查看防火墙版本号</h2><p>firewall-cmd –version<br>centos 7.3是自带firewall防火墙，提示版本号。</p><h2 id="2-查看防火墙状态"><a href="#2-查看防火墙状态" class="headerlink" title="2.查看防火墙状态"></a>2.查看防火墙状态</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">firewall-cmd --state</span><br></pre></td></tr></table></figure><a id="more"></a>
+
+
+
+<h2 id="3-添加80端口的权限"><a href="#3-添加80端口的权限" class="headerlink" title="3.添加80端口的权限"></a>3.添加80端口的权限</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=80/tcp --permanent</span><br></pre></td></tr></table></figure>
+
+<p>命令含义：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">--zone #作用域</span><br><span class="line">--add-port=80/tcp #添加端口，格式为：端口/通讯协议</span><br><span class="line">--permanent #永久生效，没有此参数重启后失效</span><br></pre></td></tr></table></figure>
+<h2 id="4-重启防火墙"><a href="#4-重启防火墙" class="headerlink" title="4.重启防火墙"></a>4.重启防火墙</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl restart firewalld</span><br></pre></td></tr></table></figure>
+
+<p>扩展：</p>
+<p>firewalld的命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">运行、停止、禁用firewalld</span><br><span class="line">启动：# systemctl start firewalld</span><br><span class="line">重启：# systemctl restart firewalld</span><br><span class="line">查看状态：# systemctl status firewalld 或者 firewall-cmd --state</span><br><span class="line">停止：# systemctl disable firewalld</span><br><span class="line">禁用：# systemctl stop firewalld</span><br><span class="line">配置firewalld</span><br><span class="line">查看版本：$ firewall-cmd --version</span><br><span class="line">查看帮助：$ firewall-cmd --help</span><br><span class="line">显示状态：$ firewall-cmd --state</span><br><span class="line">查看区域信息: $ firewall-cmd --get-active-zones</span><br><span class="line">查看指定接口所属区域：$ firewall-cmd --get-zone-of-interface=eth0</span><br><span class="line">拒绝所有包：# firewall-cmd --panic-on</span><br><span class="line">取消拒绝状态：# firewall-cmd --panic-off</span><br><span class="line">查看是否拒绝：$ firewall-cmd --query-panic</span><br><span class="line">更新防火墙规则：</span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --reload</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --complete-reload</span></span><br><span class="line">两者的区别就是第一个无需断开连接，就是firewalld特性之一动态添加规则，第二个需要断开连接，类似重启服务</span><br><span class="line">将接口添加到区域，默认接口都在public</span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --zone=public --add-interface=eth0</span></span><br><span class="line">永久生效再加上 --permanent 然后reload防火墙</span><br><span class="line">设置默认接口区域</span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --<span class="built_in">set</span>-default-zone=public</span></span><br><span class="line">立即生效无需重启</span><br><span class="line">打开端口（貌似这个才最常用）</span><br><span class="line">查看所有打开的端口：</span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --zone=dmz --list-ports</span></span><br><span class="line">加入一个端口到区域：</span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --zone=dmz --add-port=8080/tcp</span></span><br><span class="line">若要永久生效方法同上</span><br><span class="line">打开一个服务，类似于将端口可视化，服务需要在配置文件中添加，/etc/firewalld 目录下有services文件夹，这个不详细说了，详情参考文档</span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --zone=work --add-service=smtp</span></span><br><span class="line">移除服务</span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --zone=work --remove-service=smtp</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Vultr</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Supervisor使用</title>
     <url>/2019/11/12/Supervisor%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<h2 id="Surpervisor介绍"><a href="#Surpervisor介绍" class="headerlink" title="Surpervisor介绍"></a>Surpervisor介绍</h2><ul>
