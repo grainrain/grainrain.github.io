@@ -2,9 +2,9 @@
 title: 解决Vultr CentOS7主机禁用80端口问题
 date: 2019-11-15 11:04:15
 categories: 
-           - Liunx
+           - Linux
 tags:
-           - Liunx
+           - Linux
            - Vultr
 ---
 在VULTR centOS7上安装了Nginx，尝试访问默认页面时出现了无法访问的情况。
