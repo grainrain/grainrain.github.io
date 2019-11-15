@@ -7,9 +7,10 @@ tags:
            - Linux
            - Vultr
 ---
-在VULTR centOS7上安装了Nginx，尝试访问默认页面时出现了无法访问的情况。
-查看进程httpd运行着，查看80端口处于监听状态。
-百度后得知是防火墙禁了80端口，解禁后页面访问正常。
+在VULTR centOS7上安装了Nginx，无法访问Nginx初始化页面。
+
+查询资料后发现应该是防火墙禁了80端口，解禁后页面访问正常,以下为操作步骤
+
 ## 1.查看防火墙版本号
 
 firewall-cmd --version
