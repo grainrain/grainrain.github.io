@@ -26,12 +26,12 @@ Release:	7.6.1810
 Codename:	Core
 ```
 ## Surpervisor安装
-### 1.Pip在线安装
+### Pip在线安装
 ```shell
 pip install supervisor
 ```
  
-### 2.发布包安装(centos为例)
+ ### 发布包安装(centos为例)
 
 + yum install 的方式
 ```shell
