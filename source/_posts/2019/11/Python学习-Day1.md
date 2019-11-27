@@ -268,7 +268,7 @@ for i in range(10):
     print("loop:", i )
 ```
 
-## 八、while loop 
+## 九、while loop 
 
 ```python
 #_*_coding:utf-8_*_

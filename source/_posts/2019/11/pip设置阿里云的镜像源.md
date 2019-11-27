@@ -1,6 +1,6 @@
 ---
 title: pip设置阿里云的镜像源
-date: 2019-11-20 14:36:31
+date: 2019-11-18 14:36:31
 categories: 
            - Python
 tags:
