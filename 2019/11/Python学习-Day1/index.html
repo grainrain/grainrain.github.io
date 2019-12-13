@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="林 | JASON" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="1.变量介绍2.字符编码3.用户输入4.模块初识5. .pyc是什么？6.数据类型初识7.数据运算8.表达式if …else语句9.表达式for 循环10.break and continue    一、变量介绍定义规则 变量名只能是 字母、数字或下划线的任意组合 变量名的第一个字符不能是数字 以下关键字不能声明为变量名">
+<meta name="keywords" content="Python,Python3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python学习-Day1">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;Python%E5%AD%A6%E4%B9%A0-Day1&#x2F;index.html">
+<meta property="og:site_name" content="林 | JASON">
+<meta property="og:description" content="1.变量介绍2.字符编码3.用户输入4.模块初识5. .pyc是什么？6.数据类型初识7.数据运算8.表达式if …else语句9.表达式for 循环10.break and continue    一、变量介绍定义规则 变量名只能是 字母、数字或下划线的任意组合 变量名的第一个字符不能是数字 以下关键字不能声明为变量名">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;ningyylin.top&#x2F;image&#x2F;python&#x2F;ASCII.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;ningyylin.top&#x2F;image&#x2F;python&#x2F;arithmetic_operation.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;ningyylin.top&#x2F;image&#x2F;python&#x2F;comparison_operation.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;ningyylin.top&#x2F;image&#x2F;python&#x2F;assignment_operation.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;ningyylin.top&#x2F;image&#x2F;python&#x2F;logical_operation.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;ningyylin.top&#x2F;image&#x2F;python&#x2F;bit_operation.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;ningyylin.top&#x2F;image&#x2F;python&#x2F;operator_precedence.png">
+<meta property="og:updated_time" content="2019-11-27T08:23:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;ningyylin.top&#x2F;image&#x2F;python&#x2F;ASCII.jpg">
+
+<link rel="canonical" href="http://yoursite.com/2019/11/Python%E5%AD%A6%E4%B9%A0-Day1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Python学习-Day1 | 林 | JASON</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">林 | JASON</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/Python%E5%AD%A6%E4%B9%A0-Day1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yongyi Lin">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="林 | JASON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python学习-Day1
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-20 09:17:04" itemprop="dateCreated datePublished" datetime="2019-11-20T09:17:04+08:00">2019-11-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-27 16:23:44" itemprop="dateModified" datetime="2019-11-27T16:23:44+08:00">2019-11-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/11/Python%E5%AD%A6%E4%B9%A0-Day1/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习-Day1" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/11/Python%E5%AD%A6%E4%B9%A0-Day1/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/Python%E5%AD%A6%E4%B9%A0-Day1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>1.变量介绍<br>2.字符编码<br>3.用户输入<br>4.模块初识<br>5. .pyc是什么？<br>6.数据类型初识<br>7.数据运算<br>8.表达式if …else语句<br>9.表达式for 循环<br>10.break and continue   </p>
+</blockquote><h2 id="一、变量介绍"><a href="#一、变量介绍" class="headerlink" title="一、变量介绍"></a>一、变量介绍</h2><h3 id="定义规则"><a href="#定义规则" class="headerlink" title="定义规则"></a>定义规则</h3><ul>
+<li>变量名只能是 字母、数字或下划线的任意组合</li>
+<li>变量名的第一个字符不能是数字</li>
+<li>以下关键字不能声明为变量名</li>
+</ul><a id="more"></a>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">'and'</span>, <span class="string">'as'</span>, <span class="string">'assert'</span>, <span class="string">'break'</span>, <span class="string">'class'</span>, <span class="string">'continue'</span>, <span class="string">'def'</span>, <span class="string">'del'</span>, <span class="string">'elif'</span>, <span class="string">'else'</span>, <span class="string">'except'</span>, <span class="string">'exec'</span>, <span class="string">'finally'</span>, <span class="string">'for'</span>, <span class="string">'from'</span>, <span class="string">'global'</span>, <span class="string">'if'</span>, <span class="string">'import'</span>, <span class="string">'in'</span>, <span class="string">'is'</span>, <span class="string">'lambda'</span>, <span class="string">'not'</span>, <span class="string">'or'</span>, <span class="string">'pass'</span>, <span class="string">'print'</span>, <span class="string">'raise'</span>, <span class="string">'return'</span>, <span class="string">'try'</span>, <span class="string">'while'</span>, <span class="string">'with'</span>, <span class="string">'yield'</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="变量赋值"><a href="#变量赋值" class="headerlink" title="变量赋值"></a>变量赋值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ame = <span class="string">"Benjamin"</span></span><br><span class="line">name2 = name</span><br><span class="line">print(name,name2)</span><br><span class="line">name = <span class="string">"Jack"</span></span><br><span class="line">print(<span class="string">"What is the value of name2 now?"</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、字符编码"><a href="#二、字符编码" class="headerlink" title="二、字符编码"></a>二、字符编码</h2><p>python解释器在加载中py文件会对.py文件内容进行编码（默认ascill）</p>
+<p>ASCII（American Standard Code for Information Interchange，美国标准信息交换代码）是基于拉丁字母的一套电脑编码系统，主要用于显示现代英语和其他西欧语言，其最多只能用 8 位来表示（一个字节），即：2**8 = 256-1，所以，ASCII码最多只能表示 255 个符号。<br><img src="http://ningyylin.top/image/python/ASCII.jpg" alt></p>
+<h3 id="关于中文"><a href="#关于中文" class="headerlink" title="关于中文"></a>关于中文</h3><p>为了处理汉字，程序员设计了用于简体中文的GB2312和用于繁体中文的big5。</p>
+<p>GB2312(1980年)一共收录了7445个字符，包括6763个汉字和682个其它符号。汉字区的内码范围高字节从B0-F7，低字节从A1-FE，占用的码位是72*94=6768。其中有5个空位是D7FA-D7FE。</p>
+<p>GB2312 支持的汉字太少。1995年的汉字扩展规范GBK1.0收录了21886个符号，它分为汉字区和图形符号区。汉字区包括21003个字符。2000年的 GB18030是取代GBK1.0的正式国家标准。该标准收录了27484个汉字，同时还收录了藏文、蒙文、维吾尔文等主要的少数民族文字。现在的PC平台必须支持GB18030，对嵌入式产品暂不作要求。所以手机、MP3一般只支持GB2312。</p>
+<p>从ASCII、GB2312、GBK 到GB18030，这些编码方法是向下兼容的，即同一个字符在这些方案中总是有相同的编码，后面的标准支持更多的字符。在这些编码中，英文和中文可以统一地处理。区分中文编码的方法是高字节的最高位不为0。按照程序员的称呼，GB2312、GBK到GB18030都属于双字节字符集 (DBCS)。</p>
+<p>有的中文Windows的缺省内码还是GBK，可以通过GB18030升级包升级到GB18030。不过GB18030相对GBK增加的字符，普通人是很难用到的，通常我们还是用GBK指代中文Windows内码。</p>
+<h2 id="三、用户输入"><a href="#三、用户输入" class="headerlink" title="三、用户输入"></a>三、用户输入</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment">#_*_coding:utf-8_*_</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">#name = raw_input("What is your name?") #only on python 2.x</span></span><br><span class="line">name = input(<span class="string">"What is your name?"</span>)</span><br><span class="line">print(<span class="string">"Hello "</span> + name )</span><br></pre></td></tr></table></figure>
+
+<p>输入密码时，如果想要不可见，需要利用getpass 模块中的 getpass方法，即：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> getpass</span><br><span class="line">  </span><br><span class="line"><span class="comment"># 将用户输入的内容赋值给 name 变量</span></span><br><span class="line">pwd = getpass.getpass(<span class="string">"请输入密码："</span>)</span><br><span class="line">  </span><br><span class="line"><span class="comment"># 打印输入的内容</span></span><br><span class="line">print(pwd)</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、模块知识"><a href="#四、模块知识" class="headerlink" title="四、模块知识"></a>四、模块知识</h2><p>Python有非常丰富和强大的标准库和第三方库</p>
+<ul>
+<li><p>sys</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">!/usr/bin/env python</span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"> </span><br><span class="line">print(sys.argv)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">$ python test.py helo world</span><br><span class="line">[<span class="string">'test.py'</span>, <span class="string">'helo'</span>, <span class="string">'world'</span>]  <span class="comment">#把执行脚本时传递的参数获取到了</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>os</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"> </span><br><span class="line">os.system(<span class="string">"df -h"</span>) <span class="comment">#调用系统命令</span></span><br></pre></td></tr></table></figure></li>
+<li><p>python tab补全模块(自定义)</p>
+</li>
+</ul>
+<p>这里不展开，可以Google or Baidu</p>
+<h2 id="五、-pyc是什么？"><a href="#五、-pyc是什么？" class="headerlink" title="五、.pyc是什么？"></a>五、.pyc是什么？</h2><p>Python是一门先编译后解释的语言</p>
+<p>当python程序运行时，编译的结果则是保存在位于内存中的PyCodeObject中，当Python程序运行结束时，Python解释器则将PyCodeObject写回到pyc文件中。</p>
+<p>当python程序第二次运行时，首先程序会在硬盘中寻找pyc文件，如果找到，则直接载入，否则就重复上面的过程。</p>
+<p>所以我们应该这样来定位PyCodeObject和pyc文件，pyc文件其实是PyCodeObject的一种持久化保存方式</p>
+<h2 id="六、数据类型初识"><a href="#六、数据类型初识" class="headerlink" title="六、数据类型初识"></a>六、数据类型初识</h2><h3 id="1、数字"><a href="#1、数字" class="headerlink" title="1、数字"></a>1、数字</h3><p>int（整型）</p>
+<p>　　在32位机器上，整数的位数为32位，取值范围为-2<strong>31～2</strong>31-1，即-2147483648～2147483647<br>　　在64位系统上，整数的位数为64位，取值范围为-2<strong>63～2</strong>63-1，即-9223372036854775808～9223372036854775807<br>long（长整型）<br>　　跟C语言不同，Python的长整数没有指定位宽，即：Python没有限制长整数数值的大小，但实际上由于机器内存有限，我们使用的长整数数值不可能无限大。<br>　　注意，自从Python2.2起，如果整数发生溢出，Python会自动将整数数据转换为长整数，所以如今在长整数数据后面不加字母L也不会导致严重后果了。<br>float（浮点型）<br>　　浮点数用来处理实数，即带有小数的数字。类似于C语言中的double类型，占8个字节（64位），其中52位表示底，11位表示指数，剩下的一位表示符号。<br>complex（复数）<br>　　复数由实数部分和虚数部分组成，一般形式为x＋yj，其中的x是复数的实数部分，y是复数的虚数部分，这里的x和y都是实数。<br>注：Python中存在小数字池：-5 ～ 257</p>
+<h3 id="2、布尔值"><a href="#2、布尔值" class="headerlink" title="2、布尔值"></a>2、布尔值</h3><p>真或假<br>1 或 0</p>
+<h3 id="3、字符串"><a href="#3、字符串" class="headerlink" title="3、字符串"></a>3、字符串</h3><p>python中的字符串在C语言中体现为是一个字符数组，每次创建字符串时候需要在内存中开辟一块连续的空，并且一旦需要修改字符串的话，就需要再次开辟空间，+号每出现一次就会在内从中重新开辟一块空间。<br>字符串格式化输出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">"Benjamin"</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"i am %s "</span> % name</span><br><span class="line">  </span><br><span class="line"><span class="comment">#输出: i am Benjamin</span></span><br></pre></td></tr></table></figure>
+<p>字符串常用功能：</p>
+<ul>
+<li>移除空白</li>
+<li>分割</li>
+<li>长度</li>
+<li>索引</li>
+<li>切片</li>
+</ul>
+<h3 id="4、列表"><a href="#4、列表" class="headerlink" title="4、列表"></a>4、列表</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name_list = [<span class="string">'Benjamin'</span>, <span class="string">'seven'</span>, <span class="string">'eric'</span>]</span><br><span class="line">或</span><br><span class="line">name_list ＝ list([<span class="string">'Benjamin'</span>, <span class="string">'seven'</span>, <span class="string">'eric'</span>])</span><br></pre></td></tr></table></figure>
+<p>基本操作：</p>
+<ul>
+<li>索引</li>
+<li>切片</li>
+<li>追加</li>
+<li>删除</li>
+<li>长度</li>
+<li>切片</li>
+<li>循环</li>
+<li>包含</li>
+</ul>
+<h3 id="5、元组-不可变列表"><a href="#5、元组-不可变列表" class="headerlink" title="5、元组(不可变列表)"></a>5、元组(不可变列表)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ages = (<span class="number">11</span>, <span class="number">22</span>, <span class="number">33</span>, <span class="number">44</span>, <span class="number">55</span>)</span><br><span class="line">或</span><br><span class="line">ages = tuple((<span class="number">11</span>, <span class="number">22</span>, <span class="number">33</span>, <span class="number">44</span>, <span class="number">55</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="6、字典（无序）"><a href="#6、字典（无序）" class="headerlink" title="6、字典（无序）"></a>6、字典（无序）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">person = &#123;<span class="string">"name"</span>: <span class="string">"Benjamin"</span>, <span class="string">'age'</span>: <span class="number">18</span>&#125;</span><br><span class="line">或</span><br><span class="line">person = dict(&#123;<span class="string">"name"</span>: <span class="string">"Benjamin"</span>, <span class="string">'age'</span>: <span class="number">18</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="六、数据运算"><a href="#六、数据运算" class="headerlink" title="六、数据运算"></a>六、数据运算</h2><p>算数运算：<br><img src="http://ningyylin.top/image/python/arithmetic_operation.png" alt></p>
+<p>比较运算：<br><img src="http://ningyylin.top/image/python/comparison_operation.png" alt></p>
+<p>赋值运算：<br><img src="http://ningyylin.top/image/python/assignment_operation.jpg" alt></p>
+<p>逻辑运算：<br><img src="http://ningyylin.top/image/python/logical_operation.png" alt></p>
+<p>位运算：<br><img src="http://ningyylin.top/image/python/bit_operation.png" alt></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line">  </span><br><span class="line">a = <span class="number">60</span>            <span class="comment"># 60 = 0011 1100</span></span><br><span class="line">b = <span class="number">13</span>            <span class="comment"># 13 = 0000 1101</span></span><br><span class="line">c = <span class="number">0</span></span><br><span class="line">  </span><br><span class="line">c = a &amp; b;        <span class="comment"># 12 = 0000 1100</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"Line 1 - Value of c is "</span>, c</span><br><span class="line">  </span><br><span class="line">c = a | b;        <span class="comment"># 61 = 0011 1101</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"Line 2 - Value of c is "</span>, c</span><br><span class="line">  </span><br><span class="line">c = a ^ b;        <span class="comment"># 49 = 0011 0001 #相同为0，不同为1</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"Line 3 - Value of c is "</span>, c</span><br><span class="line">  </span><br><span class="line">c = ~a;           <span class="comment"># -61 = 1100 0011</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"Line 4 - Value of c is "</span>, c</span><br><span class="line">  </span><br><span class="line">c = a &lt;&lt; <span class="number">2</span>;       <span class="comment"># 240 = 1111 0000</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"Line 5 - Value of c is "</span>, c</span><br><span class="line">  </span><br><span class="line">c = a &gt;&gt; <span class="number">2</span>;       <span class="comment"># 15 = 0000 1111</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"Line 6 - Value of c is "</span>, c</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按位取反运算规则(按位取反再加1)</span></span><br></pre></td></tr></table></figure>
+
+<p>运算符优先级：<br><img src="http://ningyylin.top/image/python/operator_precedence.png" alt></p>
+<h2 id="七、表达式if-else"><a href="#七、表达式if-else" class="headerlink" title="七、表达式if  else"></a>七、表达式if  else</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 验证用户名和密码</span></span><br><span class="line"><span class="comment">#     如果错误，则输出用户名或密码错误</span></span><br><span class="line"><span class="comment">#     如果成功，则输出 欢迎，XXX!</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: encoding -*-</span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> getpass</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">name = raw_input(<span class="string">'请输入用户名：'</span>)</span><br><span class="line">pwd = getpass.getpass(<span class="string">'请输入密码：'</span>)</span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span> name == <span class="string">"alex"</span> <span class="keyword">and</span> pwd == <span class="string">"cmd"</span>:</span><br><span class="line">    print(<span class="string">"欢迎，alex！"</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">"用户名和密码错误"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="八、表达式for-循环"><a href="#八、表达式for-循环" class="headerlink" title="八、表达式for 循环"></a>八、表达式for 循环</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#_*_coding:utf-8_*_</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    print(<span class="string">"loop:"</span>, i )</span><br></pre></td></tr></table></figure>
+
+<h2 id="九、while-loop"><a href="#九、while-loop" class="headerlink" title="九、while loop"></a>九、while loop</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#_*_coding:utf-8_*_</span></span><br><span class="line"> </span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    print(<span class="string">"dead loop..."</span>,count)</span><br><span class="line">    count +=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Python3/" rel="tag"># Python3</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/pip%E8%AE%BE%E7%BD%AE%E9%98%BF%E9%87%8C%E4%BA%91%E7%9A%84%E9%95%9C%E5%83%8F%E6%BA%90/" rel="next" title="pip设置阿里云的镜像源">
+                  <i class="fa fa-chevron-left"></i> pip设置阿里云的镜像源
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/Python%E5%AD%A6%E4%B9%A0-Day2/" rel="prev" title="Python学习-Day2">
+                  Python学习-Day2 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、变量介绍"><span class="nav-number">1.</span> <span class="nav-text">一、变量介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义规则"><span class="nav-number">1.1.</span> <span class="nav-text">定义规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量赋值"><span class="nav-number">1.2.</span> <span class="nav-text">变量赋值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、字符编码"><span class="nav-number">2.</span> <span class="nav-text">二、字符编码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于中文"><span class="nav-number">2.1.</span> <span class="nav-text">关于中文</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、用户输入"><span class="nav-number">3.</span> <span class="nav-text">三、用户输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、模块知识"><span class="nav-number">4.</span> <span class="nav-text">四、模块知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、-pyc是什么？"><span class="nav-number">5.</span> <span class="nav-text">五、.pyc是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、数据类型初识"><span class="nav-number">6.</span> <span class="nav-text">六、数据类型初识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、数字"><span class="nav-number">6.1.</span> <span class="nav-text">1、数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、布尔值"><span class="nav-number">6.2.</span> <span class="nav-text">2、布尔值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、字符串"><span class="nav-number">6.3.</span> <span class="nav-text">3、字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、列表"><span class="nav-number">6.4.</span> <span class="nav-text">4、列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、元组-不可变列表"><span class="nav-number">6.5.</span> <span class="nav-text">5、元组(不可变列表)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、字典（无序）"><span class="nav-number">6.6.</span> <span class="nav-text">6、字典（无序）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、数据运算"><span class="nav-number">7.</span> <span class="nav-text">六、数据运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、表达式if-else"><span class="nav-number">8.</span> <span class="nav-text">七、表达式if  else</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、表达式for-循环"><span class="nav-number">9.</span> <span class="nav-text">八、表达式for 循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九、while-loop"><span class="nav-number">10.</span> <span class="nav-text">九、while loop</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Yongyi Lin"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Yongyi Lin</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grainrain" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;grainrain" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/mailto:lingfenglyy@gmail.com" title="E-Mail &amp;rarr; mailto:lingfenglyy@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yongyi Lin</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  </div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: true,
+    appId: 'dU3AocxWulnzN8DNg0bTw829-gzGzoHsz',
+    appKey: 'jSes7ppnweW70KLQJjGUd15q',
+    placeholder: "欢饮留言,留下你的邮箱,有回复就回提醒你~(邮箱不会被公开)",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: 'zh-cn' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
