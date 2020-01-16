@@ -1,10 +1,246 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>sed命令笔记</title>
+    <url>/2020/1/sed%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sed -i <span class="string">'s/char/chara/g'</span> filename  <span class="comment">#这里是将filename的文件中所有的char替换为chara</span></span><br><span class="line">sed <span class="string">'/^$/d'</span> file  <span class="comment">#删除空白行</span></span><br><span class="line">sed <span class="string">'2d'</span> file  <span class="comment">#删除第二行</span></span><br><span class="line">sed <span class="string">'2,$d'</span> file  <span class="comment">#删除第二行到最后一行</span></span><br><span class="line">sed <span class="string">'$d'</span> file <span class="comment">#删除最后一行</span></span><br><span class="line">sed <span class="string">'/^test/'</span>d file <span class="comment">#删除开头为test的行</span></span><br><span class="line">sed -i <span class="string">'2a\this is a test line'</span> test.conf <span class="comment">#将this is a test line添加至第二行</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Sed</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>你是普通人吗</title>
+    <url>/2020/1/%E4%BD%A0%E6%98%AF%E6%99%AE%E9%80%9A%E4%BA%BA%E5%90%97%20/</url>
+    <content><![CDATA[<p>  &nbsp;&nbsp;&nbsp;&nbsp;最近听到一段对话，谈到人的智商真的是有差别的。听完之后，就想到另外一句话，就是我们很多人拼尽一生，也不过，让自己成为了一个普通人。你的生活阅历，你的经验，总结出来的一些话，一些人生哲理，但对于别人而言，它只是常识。<br>  &nbsp;&nbsp;&nbsp;&nbsp;中国的经济发展，速度比较快，不为生存而烦恼才能谈得上发展。这个过程有没有跨越式的，当然有。但毕竟是少部分人。绝大部分人，必须要经历为生存烦恼，到为发展而烦恼这个过程。<br>  &nbsp;&nbsp;&nbsp;&nbsp;通过二八定律，我们会发现一个问题，80%的人为生存而烦恼，没有资格为发展而烦恼。所以大部分年轻人，当然也包括我这种即将步入中年的人都是一样的，必须生命不息，奋斗不止。<br>  &nbsp;&nbsp;&nbsp;&nbsp;读了快20年的书，深感中国教育都是要学生守规矩，安分守己。守规矩的人基本上也都是平庸人和平常人，因为富贵险中求。这些年轻人，拼命的努力，最后获得的就是一个普通人。什么叫普通人，正常的普通人就是不为生存而烦恼。</p>]]></content>
+      <categories>
+        <category>Life</category>
+      </categories>
+      <tags>
+        <tag>人生</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>从RDBMS增量拉取数据思路</title>
+    <url>/2020/1/%E5%A2%9E%E9%87%8F%E4%BB%8E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8B%89%E5%8F%96%E6%95%B0%E6%8D%AE/</url>
+    <content><![CDATA[<p> 这里依据ID和LastModifytime思路是相同的</p><h2 id="在-SQL-数据库中创建数据源表"><a href="#在-SQL-数据库中创建数据源表" class="headerlink" title="在 SQL 数据库中创建数据源表"></a>在 SQL 数据库中创建数据源表</h2><p>1.首先创建示例表data_source_table<br> <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> data_source_table</span><br><span class="line">(</span><br><span class="line">    PersonID <span class="built_in">int</span>,</span><br><span class="line">    <span class="keyword">Name</span> <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">    LastModifytime datetime</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> data_source_table</span><br><span class="line">(PersonID, <span class="keyword">Name</span>, LastModifytime)</span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line">(<span class="number">1</span>, <span class="string">'aaaa'</span>,<span class="string">'9/1/2017 12:56:00 AM'</span>),</span><br><span class="line">(<span class="number">2</span>, <span class="string">'bbbb'</span>,<span class="string">'9/2/2017 5:23:00 AM'</span>),</span><br><span class="line">(<span class="number">3</span>, <span class="string">'cccc'</span>,<span class="string">'9/3/2017 2:36:00 AM'</span>),</span><br><span class="line">(<span class="number">4</span>, <span class="string">'dddd'</span>,<span class="string">'9/4/2017 3:21:00 AM'</span>),</span><br><span class="line">(<span class="number">5</span>, <span class="string">'eeee'</span>,<span class="string">'9/5/2017 8:06:00 AM'</span>);</span><br></pre></td></tr></table></figure></p><a id="more"></a>
+
+<p>这里使用 LastModifytime 作为拉取依据</p>
+<h2 id="在-SQL-数据库中创建另一个表-存储表名和LastModifytime"><a href="#在-SQL-数据库中创建另一个表-存储表名和LastModifytime" class="headerlink" title="在 SQL 数据库中创建另一个表,存储表名和LastModifytime"></a>在 SQL 数据库中创建另一个表,存储表名和LastModifytime</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> lastmodify_criteria_table</span><br><span class="line">(</span><br><span class="line"></span><br><span class="line">TableName <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">LastModifyTimeValue datetime,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="在-SQL-数据库中创建存储过程"><a href="#在-SQL-数据库中创建存储过程" class="headerlink" title="在 SQL 数据库中创建存储过程"></a>在 SQL 数据库中创建存储过程</h2> <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> p_lastmodify_criteria @LastModifiedtime datetime, @TableName <span class="built_in">varchar</span>(<span class="number">50</span>)</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">    <span class="keyword">UPDATE</span> lastmodify_criteria_table</span><br><span class="line">    <span class="keyword">SET</span> [LastModifyTimeValue] = @LastModifiedtime </span><br><span class="line"><span class="keyword">WHERE</span> [TableName] = @TableName</span><br><span class="line"><span class="keyword">END</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ETL后续"><a href="#ETL后续" class="headerlink" title="ETL后续"></a>ETL后续</h2><ul>
+<li>ETL过程首先需要从lastmodify_criteria_table获取ETL 表的 LastModifyTimeValue</li>
+<li>将获取的值传递给ETL动作</li>
+<li>ETL完毕调用存储过程，将最大LastModifyTimeValue和表名传递给存储过程，更新lastmodify_criteria_table</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Bigdata</category>
+      </categories>
+      <tags>
+        <tag>ETL</tag>
+        <tag>Incremental</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>你是普通人吗</title>
+    <url>/2020/1/Hadoop%20MapReduce%20Framework%20Architecture%20%20copy/</url>
+    <content><![CDATA[<h2 id="Hadoop-MapReduce-Framework-Architecture"><a href="#Hadoop-MapReduce-Framework-Architecture" class="headerlink" title="Hadoop MapReduce Framework Architecture"></a>Hadoop MapReduce Framework Architecture</h2><p><img src="http://ningyylin.top/image/bigdata/Hadoop-MapReduce-Framework-Architecture.png" alt></p>]]></content>
+      <categories>
+        <category>Bigdata</category>
+      </categories>
+      <tags>
+        <tag>Bigdata</tag>
+        <tag>MapReduce</tag>
+        <tag>Hadoop</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hadoop MapReduce Framework Architecture</title>
+    <url>/2020/1/Hadoop%20MapReduce%20Framework%20Architecture%20/</url>
+    <content><![CDATA[<h2 id="Hadoop-MapReduce-Framework-Architecture"><a href="#Hadoop-MapReduce-Framework-Architecture" class="headerlink" title="Hadoop MapReduce Framework Architecture"></a>Hadoop MapReduce Framework Architecture</h2><p><img src="http://ningyylin.top/image/bigdata/Hadoop-MapReduce-Framework-Architecture.png" alt></p>]]></content>
+      <categories>
+        <category>Bigdata</category>
+      </categories>
+      <tags>
+        <tag>Bigdata</tag>
+        <tag>MapReduce</tag>
+        <tag>Hadoop</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Support Q&A</title>
+    <url>/2019/12/Q&amp;A/</url>
+    <content><![CDATA[<h2 id="Azure-HDInsight"><a href="#Azure-HDInsight" class="headerlink" title="Azure HDInsight"></a>Azure HDInsight</h2><ul>
+<li><p>MVP</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">1. 拨通雀巢VPN访问跳板机。</span><br><span class="line">2. 登陆跳板机，在跳板机host文件里添加如下记录  </span><br><span class="line">10.236.77.178  shenzhou-mvp-hdinsight-hbase.azurehdinsight.cn</span><br><span class="line">3. 通过url  在浏览器输入</span><br><span class="line">shenzhou-mvp-hdinsight-hbase.azurehdinsight.cn:8080访问hive view</span><br></pre></td></tr></table></figure></li>
+<li><p>DEV</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">本地host文件里添加如下记录，并通过雀巢VPN访问集群</span><br><span class="line">10.236.80.81 gw1-stg-hb.mqtdsswgysfelkcmbgy1nohcwa.cx.internal.chinacloudapp.cn gw1-stg-hb  stg-hbase-shenzhou-hdinsight.azurehdinsight.cn</span><br><span class="line"></span><br><span class="line">hive url:http://10.236.80.86:8080</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>STG</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">本地host文件里添加如下记录，并通过雀巢VPN访问集群</span><br><span class="line">10.236.80.145 gw1-stg-sp.mqtdsswgysfelkcmbgy1nohcwa.cx.internal.chinacloudapp.cn gw1-stg-sp stg-spark-shenzhou-hdinsight.azurehdinsight.cn</span><br><span class="line"></span><br><span class="line">hive url:http://10.236.80.86:8080</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul><a id="more"></a>
+<h2 id="Azure-DataFactory"><a href="#Azure-DataFactory" class="headerlink" title="Azure DataFactory"></a>Azure DataFactory</h2><p>目前已经注册Azure DataFactory</p>
+<ul>
+<li><p>MVP</p>
+<ul>
+<li>shenzhou-mvp-datafactory01            [ATOS]</li>
+<li>shenzhou-mvp-dscc-datafactory         </li>
+<li>shenzhou-mvp-hand-datafactory</li>
+<li>shenzhou-mvp-mdm-datafactory          [IBM]</li>
+<li>shenzhou-mvp-paperless-datafactory    [xspeed]</li>
+<li>shenzhou-mvp-qrcode-datafactory</li>
+</ul>
+</li>
+<li><p>DEV</p>
+<ul>
+<li>shenzhou-dev-bypass-datafactory       [xspeed]</li>
+<li>shenzhou-dev-dscc-datafactory       </li>
+<li>shenzhou-dev-fc-datafactory</li>
+<li>shenzhou-dev-hand-datafactory</li>
+<li>shenzhou-dev-hr-datafactory           [xspeed]</li>
+<li>shenzhou-dev-paperless-datafactory    [xspeed]</li>
+<li>shenzhou-dev-qrcode-datafactory</li>
+</ul>
+</li>
+<li><p>STG</p>
+<ul>
+<li>shenzhou-stg-bypass-datafactory</li>
+<li>shenzhou-stg-datafactory              [ATOS]</li>
+<li>shenzhou-stg-dscc-datafactory</li>
+<li>shenzhou-stg-fc-datafactory</li>
+<li>shenzhou-stg-hand-datafactory</li>
+<li>shenzhou-stg-hr-datafactory</li>
+<li>shenzhou-stg-paperless-datafactory</li>
+<li>shenzhou-stg-qrcode-datafactory</li>
+</ul>
+<h2 id="Azure-DataLake"><a href="#Azure-DataLake" class="headerlink" title="Azure DataLake"></a>Azure DataLake</h2><p>数据湖目录新规范<br><img src="http://ningyylin.top/image/other/DL.png" alt><br><img src="http://ningyylin.top/image/other/L3.png" alt><br><img src="http://ningyylin.top/image/other/L5-L6.png" alt></p>
+</li>
+<li><p>MVP</p>
+<ul>
+<li><p><a href="https://shenzhoumvpdatalake.blob.core.chinacloudapi.cn/mvpdatalake" target="_blank" rel="noopener">https://shenzhoumvpdatalake.blob.core.chinacloudapi.cn/mvpdatalake</a> (存放数据)</p>
+<ul>
+<li>mvp<ul>
+<li>inbound</li>
+<li>archive</li>
+<li>error</li>
+<li>process</li>
+<li>qrcode</li>
+<li>solutions</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="https://shenzhoumvpdatalake02.blob.core.chinacloudapi.cn/workspace" target="_blank" rel="noopener">https://shenzhoumvpdatalake02.blob.core.chinacloudapi.cn/workspace</a> (存放scripts)</p>
+<ul>
+<li>scripts<ul>
+<li>dscc</li>
+<li>fc</li>
+<li>paperless</li>
+<li>hr</li>
+<li>qrcode</li>
+<li>dscc</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>DEV</p>
+<ul>
+<li><p><a href="https://shenzhoudevdatalake.blob.core.chinacloudapi.cn/devdatalake" target="_blank" rel="noopener">https://shenzhoudevdatalake.blob.core.chinacloudapi.cn/devdatalake</a>  (存放数据)</p>
+<ul>
+<li>dev<ul>
+<li>inbound</li>
+<li>archive</li>
+<li>error</li>
+<li>process</li>
+<li>qrcode</li>
+<li>solutions</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="https://shenzhoudevdatalake02.blob.core.chinacloudapi.cn/workspace" target="_blank" rel="noopener">https://shenzhoudevdatalake02.blob.core.chinacloudapi.cn/workspace</a> (存放scripts)</p>
+<ul>
+<li>scripts<ul>
+<li>dscc</li>
+<li>fc</li>
+<li>paperless</li>
+<li>hr</li>
+<li>qrcode</li>
+<li>dscc</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Azure</category>
+      </categories>
+      <tags>
+        <tag>DataFactory</tag>
+        <tag>DataLake</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Lambda 体系架构</title>
+    <url>/2019/12/Lambda%20%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[<p>使用 Lambda 体系结构可对大型数据集进行高效的数据处理。 Lambda 体系结构使用批处理、流式处理和服务层，将查询大数据时存在的延迟降到最低。</p><p>什么是 lambda 体系结构？<br>lambda 体系结构是一种通用、可缩放且容错的数据处理体系结构，可以解决批处理和速度延迟方案。<br>源： <a href="http://lambda-architecture.net/" target="_blank" rel="noopener">http://lambda-architecture.net/</a></p><a id="more"></a>
+
+<p><img src="http://ningyylin.top/image/bigdata/la-overview_small.png" alt></p>
+<p>所有数据同时推送到批处理层和速度层。</p>
+<ol>
+<li>批处理层包含主数据集（不可变、仅限追加的原始数据集），并预先计算批处理视图。</li>
+<li>服务层包含快速查询的批处理视图。</li>
+<li>速度层补偿处理时间（针对服务层），只处理最新的数据。</li>
+<li>通过合并批处理视图和实时视图中的结果或者单独 ping 每个结果，可以应答所有查询。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Bigdata</category>
+      </categories>
+      <tags>
+        <tag>Lambda</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hadoop数据倾斜问题定位</title>
+    <url>/2019/12/Hadoop%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D/</url>
+    <content><![CDATA[<p>Hadoop集群Datanode数据倾斜，部分节点hdfs空间使用率达到90%以上，于是新增Datenode节点，并进行balance操作。</p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sh start-balancer.sh -threshold 5</span><br></pre></td></tr></table></figure><p>如果需要提高blance的速度，将默认的balance速度从1MB/s增大到50MB/s</p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">set</span> balance to 50M/s</span></span><br><span class="line">hdfs dfsadmin -setBalancerBandwidth 52428800</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Bigdata</category>
+      </categories>
+      <tags>
+        <tag>Bigdata,Hdfs,Balance</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DW数据仓库分层模型设计</title>
+    <url>/2019/12/DW%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%88%86%E5%B1%82%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1/</url>
+    <content><![CDATA[<h2 id="DW模型"><a href="#DW模型" class="headerlink" title="DW模型"></a>DW模型</h2><p><img src="http://ningyylin.top/image/bigdata/DW.png" alt></p>]]></content>
+      <categories>
+        <category>Bigdata</category>
+      </categories>
+      <tags>
+        <tag>Bigdata</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Python学习-Day4</title>
     <url>/2019/11/Python%E5%AD%A6%E4%B9%A0-Day4/</url>
     <content><![CDATA[<blockquote>
-<p>1.递归<br>2.装饰器<br>3.迭代器与生成器</p>
+<p>1.递归<br>2.装饰器<br>3.迭代器与生成器<br>4.软件目录结构规范</p>
 </blockquote><h2 id="一、递归"><a href="#一、递归" class="headerlink" title="一、递归"></a>一、递归</h2><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>递归算法特点：<br>(1) 递归就是在过程或函数里调用自身。<br>(2) 在使用递归策略时，必须有一个明确的递归结束条件，称为递归出口。<br>(3) 递归算法解题通常显得很简洁，但递归算法解题的运行效率较低。所以一般不提倡用递归算法设计程序。<br>(4) 在递归调用的过程当中系统为每一层的返回点、局部量等开辟了栈来存储。递归次数过多容易造成栈溢出等。所以一般不提倡用递归算法设计程序。</p><a id="more"></a>
 
 <h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc</span><span class="params">(n)</span>:</span></span><br><span class="line">    print(n)</span><br><span class="line">    <span class="keyword">if</span> int(n / <span class="number">2</span>) &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> calc(int(n / <span class="number">2</span>))</span><br><span class="line">    print(<span class="string">"-&gt; "</span>,n)</span><br><span class="line">calc(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
@@ -45,6 +281,38 @@
 <p>把list、dict、str等Iterable变成Iterator可以使用iter()函数：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(iter([]), Iterator)</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(iter(<span class="string">'abc'</span>), Iterator)</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="四、软件目录结构规范"><a href="#四、软件目录结构规范" class="headerlink" title="四、软件目录结构规范"></a>四、软件目录结构规范</h2><pre><code>Foo/
+|-- bin/
+|   |-- foo
+|
+|-- foo/
+|   |-- tests/
+|   |   |-- __init__.py
+|   |   |-- test_main.py
+|   |
+|   |-- __init__.py
+|   |-- main.py
+|
+|-- docs/
+|   |-- conf.py
+|   |-- abc.rst
+|
+|-- setup.py
+|-- requirements.txt
+|-- README</code></pre><p>解释一下:</p>
+<ol>
+<li>bin/: 存放项目的一些可执行文件，当然你可以起名script/之类的也行。</li>
+<li>foo/: 存放项目的所有源代码。(1) 源代码中的所有模块、包都应该放在此目录。不要置于顶层目录。(2) 其子目录tests/存放单元测试代码； (3) 程序的入口最好命名为main.py。</li>
+<li>docs/: 存放一些文档。</li>
+<li>setup.py: 安装、部署、打包的脚本。</li>
+<li>requirements.txt: 存放软件依赖的外部Python包列表。</li>
+<li>README: 项目说明文件。<br>除此之外，有一些方案给出了更加多的内容。比如LICENSE.txt,ChangeLog.txt文件等，这里没有列，因为这些东西主要是项目开源的时候需要用到。如果想写一个开源软件，目录该如何组织，可以参考<a href="https://www.jeffknupp.com/blog/2013/08/16/open-sourcing-a-python-project-the-right-way/" target="_blank" rel="noopener" title="这里">这里</a></li>
+</ol>
+<p>下面，再简单讲一下对这些目录的理解和个人要求吧。</p>
+<p>关于README的内容<br>是每个项目都应该有的一个文件，目的是能简要描述该项目的信息，让读者快速了解这个项目。</p>
+<p>它需要说明以下几个事项:</p>
+<p>软件定位，软件的基本功能。<br>运行代码的方法: 安装环境、启动命令等。<br>简要的使用说明。<br>代码目录结构说明，更详细点可以说明软件的基本原理。<br>常见问题说明。<br>有以上几点是比较好的一个README。在软件开发初期，由于开发过程中以上内容可能不明确或者发生变化，并不是一定要在一开始就将所有信息都补全。但是在项目完结的时候，是需要撰写这样的一个文档的。</p>
+<p>可以参考Redis源码中<a href="https://github.com/antirez/redis#what-is-redis" target="_blank" rel="noopener" title="Readme">Readme</a>的写法，这里面简洁但是清晰的描述了Redis功能和源码结构。</p>
 ]]></content>
       <categories>
         <category>Python</category>
@@ -406,17 +674,6 @@ ssh -T git@gitee.com</code></pre>
       </categories>
       <tags>
         <tag>Supervisor</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>DW数据仓库分层模型设计</title>
-    <url>/2019/12/DW%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%88%86%E5%B1%82%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1/</url>
-    <content><![CDATA[<h2 id="DW模型"><a href="#DW模型" class="headerlink" title="DW模型"></a>DW模型</h2><p><img src="http://ningyylin.top/image/bigdata/DW.png" alt></p>]]></content>
-      <categories>
-        <category>Bigdata</category>
-      </categories>
-      <tags>
-        <tag>Bigdata</tag>
       </tags>
   </entry>
   <entry>
