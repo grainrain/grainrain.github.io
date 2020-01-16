@@ -12,4 +12,12 @@
 {"title":"pip设置阿里云的镜像源","url":"/2019/11/pip设置阿里云的镜像源/"},
 {"title":"解决Vultr CentOS7主机禁用80端口问题","url":"/2019/11/解决Vultr CentOS7主机禁用80端口的问题/"},
 {"title":"DW数据仓库分层模型设计","url":"/2019/12/DW数据仓库分层模型设计/"},
+{"title":"Hadoop数据倾斜问题定位","url":"/2019/12/Hadoop数据倾斜问题定位/"},
+{"title":"Lambda 体系架构","url":"/2019/12/Lambda 体系结构/"},
+{"title":"Support Q&A","url":"/2019/12/Q&A/"},
+{"title":"你是普通人吗","url":"/2020/1/Hadoop MapReduce Framework Architecture  copy/"},
+{"title":"Hadoop MapReduce Framework Architecture","url":"/2020/1/Hadoop MapReduce Framework Architecture /"},
+{"title":"sed命令笔记","url":"/2020/1/sed命令笔记/"},
+{"title":"你是普通人吗","url":"/2020/1/你是普通人吗 /"},
+{"title":"从RDBMS增量拉取数据思路","url":"/2020/1/增量从关系型数据库拉取数据/"},
 ]
