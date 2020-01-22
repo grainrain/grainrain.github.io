@@ -56,14 +56,14 @@
 <meta name="keywords" content="ETL,Incremental">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从RDBMS增量拉取数据思路">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;1&#x2F;%E5%A2%9E%E9%87%8F%E4%BB%8E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8B%89%E5%8F%96%E6%95%B0%E6%8D%AE&#x2F;index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;ningyylin.top&#x2F;2020&#x2F;1&#x2F;%E5%A2%9E%E9%87%8F%E4%BB%8E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8B%89%E5%8F%96%E6%95%B0%E6%8D%AE&#x2F;index.html">
 <meta property="og:site_name" content="林 | JASON">
 <meta property="og:description" content="这里依据ID和LastModifytime思路是相同的在 SQL 数据库中创建数据源表1.首先创建示例表data_source_table 123456789101112131415create table data_source_table(    PersonID int,    Name varchar(255),    LastModifytime datetime);INSERT IN">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-01-09T08:53:56.000Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/1/%E5%A2%9E%E9%87%8F%E4%BB%8E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8B%89%E5%8F%96%E6%95%B0%E6%8D%AE/">
+<link rel="canonical" href="http://ningyylin.top/2020/1/%E5%A2%9E%E9%87%8F%E4%BB%8E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8B%89%E5%8F%96%E6%95%B0%E6%8D%AE/">
 
 
 <script id="page-configurations">
@@ -216,7 +216,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/1/%E5%A2%9E%E9%87%8F%E4%BB%8E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8B%89%E5%8F%96%E6%95%B0%E6%8D%AE/">
+    <link itemprop="mainEntityOfPage" href="http://ningyylin.top/2020/1/%E5%A2%9E%E9%87%8F%E4%BB%8E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8B%89%E5%8F%96%E6%95%B0%E6%8D%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -313,7 +313,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://yoursite.com/2020/1/%E5%A2%9E%E9%87%8F%E4%BB%8E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8B%89%E5%8F%96%E6%95%B0%E6%8D%AE/" title="从RDBMS增量拉取数据思路">http://yoursite.com/2020/1/%E5%A2%9E%E9%87%8F%E4%BB%8E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8B%89%E5%8F%96%E6%95%B0%E6%8D%AE/</a>
+    <a href="http://ningyylin.top/2020/1/%E5%A2%9E%E9%87%8F%E4%BB%8E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8B%89%E5%8F%96%E6%95%B0%E6%8D%AE/" title="从RDBMS增量拉取数据思路">http://ningyylin.top/2020/1/%E5%A2%9E%E9%87%8F%E4%BB%8E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8B%89%E5%8F%96%E6%95%B0%E6%8D%AE/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
