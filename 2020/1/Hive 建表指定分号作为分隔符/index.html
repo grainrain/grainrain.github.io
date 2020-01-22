@@ -52,18 +52,20 @@
   };
 </script>
 
-  <meta name="description" content="Hadoop集群Datanode数据倾斜，部分节点hdfs空间使用率达到90%以上，于是新增Datenode节点，并进行balance操作。1sh start-balancer.sh -threshold 5如果需要提高blance的速度，将默认的balance速度从1MB&#x2F;s增大到50MB&#x2F;s12#set balance to 50M&#x2F;shdfs dfsadmin -setBalancerBan">
-<meta name="keywords" content="Bigdata,Hdfs,Balance">
+  <meta name="description" content="本文在创建hive表中定义字段分割符的时候 用了”;”作为字段分隔符，起因是数据中存在逗号，默认采用的逗号作为分割符会产生数据分裂原始数据样本demo.csv123111;Wuxi Demi Trading Co.,Ltd.;12222;Jiangsu Jiyin Food Co.,Ltd.;12333;Jiangsu Maileduo Technology Co.,Ltd;22">
+<meta name="keywords" content="Hive">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hadoop数据倾斜问题定位">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;Hadoop%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D&#x2F;index.html">
+<meta property="og:title" content="Hive 建表指定分号作为分隔符">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;1&#x2F;Hive%20%E5%BB%BA%E8%A1%A8%E6%8C%87%E5%AE%9A%E5%88%86%E5%8F%B7%E4%BD%9C%E4%B8%BA%E5%88%86%E9%9A%94%E7%AC%A6&#x2F;index.html">
 <meta property="og:site_name" content="林 | JASON">
-<meta property="og:description" content="Hadoop集群Datanode数据倾斜，部分节点hdfs空间使用率达到90%以上，于是新增Datenode节点，并进行balance操作。1sh start-balancer.sh -threshold 5如果需要提高blance的速度，将默认的balance速度从1MB&#x2F;s增大到50MB&#x2F;s12#set balance to 50M&#x2F;shdfs dfsadmin -setBalancerBan">
+<meta property="og:description" content="本文在创建hive表中定义字段分割符的时候 用了”;”作为字段分隔符，起因是数据中存在逗号，默认采用的逗号作为分割符会产生数据分裂原始数据样本demo.csv123111;Wuxi Demi Trading Co.,Ltd.;12222;Jiangsu Jiyin Food Co.,Ltd.;12333;Jiangsu Maileduo Technology Co.,Ltd;22">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-23T02:03:41.000Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;ningyylin.top&#x2F;image&#x2F;bigdata&#x2F;hive-create-table.png">
+<meta property="og:updated_time" content="2020-01-22T02:17:52.000Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;ningyylin.top&#x2F;image&#x2F;bigdata&#x2F;hive-create-table.png">
 
-<link rel="canonical" href="http://yoursite.com/2019/12/Hadoop%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D/">
+<link rel="canonical" href="http://yoursite.com/2020/1/Hive%20%E5%BB%BA%E8%A1%A8%E6%8C%87%E5%AE%9A%E5%88%86%E5%8F%B7%E4%BD%9C%E4%B8%BA%E5%88%86%E9%9A%94%E7%AC%A6/">
 
 
 <script id="page-configurations">
@@ -77,7 +79,7 @@
   };
 </script>
 
-  <title>Hadoop数据倾斜问题定位 | 林 | JASON</title>
+  <title>Hive 建表指定分号作为分隔符 | 林 | JASON</title>
   
 
 
@@ -216,7 +218,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/Hadoop%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/1/Hive%20%E5%BB%BA%E8%A1%A8%E6%8C%87%E5%AE%9A%E5%88%86%E5%8F%B7%E4%BD%9C%E4%B8%BA%E5%88%86%E9%9A%94%E7%AC%A6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -229,7 +231,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hadoop数据倾斜问题定位
+          Hive 建表指定分号作为分隔符
         </h1>
 
         <div class="post-meta">
@@ -240,7 +242,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2019-12-23 09:56:51 / 修改时间：10:03:41" itemprop="dateCreated datePublished" datetime="2019-12-23T09:56:51+08:00">2019-12-23</time>
+              <time title="创建时间：2020-01-22 09:07:07 / 修改时间：10:17:52" itemprop="dateCreated datePublished" datetime="2020-01-22T09:07:07+08:00">2020-01-22</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -255,7 +257,7 @@
             </span>
 
           
-            <span id="/2019/12/Hadoop%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D/" class="post-meta-item leancloud_visitors" data-flag-title="Hadoop数据倾斜问题定位" title="阅读次数">
+            <span id="/2020/1/Hive%20%E5%BB%BA%E8%A1%A8%E6%8C%87%E5%AE%9A%E5%88%86%E5%8F%B7%E4%BD%9C%E4%B8%BA%E5%88%86%E9%9A%94%E7%AC%A6/" class="post-meta-item leancloud_visitors" data-flag-title="Hive 建表指定分号作为分隔符" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -270,8 +272,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/12/Hadoop%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/Hadoop%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/1/Hive%20%E5%BB%BA%E8%A1%A8%E6%8C%87%E5%AE%9A%E5%88%86%E5%8F%B7%E4%BD%9C%E4%B8%BA%E5%88%86%E9%9A%94%E7%AC%A6/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/1/Hive%20%E5%BB%BA%E8%A1%A8%E6%8C%87%E5%AE%9A%E5%88%86%E5%8F%B7%E4%BD%9C%E4%B8%BA%E5%88%86%E9%9A%94%E7%AC%A6/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -286,14 +288,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Hadoop集群Datanode数据倾斜，部分节点hdfs空间使用率达到90%以上，于是新增Datenode节点，并进行balance操作。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh start-balancer.sh -threshold 5</span><br></pre></td></tr></table></figure><p>如果需要提高blance的速度，将默认的balance速度从1MB/s增大到50MB/s</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">set</span> balance to 50M/s</span></span><br><span class="line">hdfs dfsadmin -setBalancerBandwidth 52428800</span><br></pre></td></tr></table></figure><a id="more"></a>
+        <p>本文在创建hive表中定义字段分割符的时候 用了”;”作为字段分隔符，起因是数据中存在逗号，默认采用的逗号作为分割符会产生数据分裂</p><h1 id="原始数据样本"><a href="#原始数据样本" class="headerlink" title="原始数据样本"></a>原始数据样本</h1><p>demo.csv</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">111;Wuxi Demi Trading Co.,Ltd.;12</span><br><span class="line">222;Jiangsu Jiyin Food Co.,Ltd.;12</span><br><span class="line">333;Jiangsu Maileduo Technology Co.,Ltd;22</span><br></pre></td></tr></table></figure><a id="more"></a>
 
 
 
+<h1 id="创建hive表语句"><a href="#创建hive表语句" class="headerlink" title="创建hive表语句"></a>创建hive表语句</h1><p>分号的ASCII值是073 那么将定义表如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">external</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> <span class="keyword">sample</span> (</span><br><span class="line">    vendor_nbr <span class="keyword">string</span>,</span><br><span class="line">    vendor_name <span class="keyword">string</span>,</span><br><span class="line">    vnpk_qty <span class="keyword">string</span>)</span><br><span class="line"><span class="keyword">row</span> <span class="keyword">format</span> <span class="keyword">delimited</span> </span><br><span class="line"><span class="keyword">fields</span> <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">'\073'</span> </span><br><span class="line"><span class="keyword">stored</span> <span class="keyword">as</span> textfile location <span class="string">'/example/lin/csv/'</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="查询效果如图"><a href="#查询效果如图" class="headerlink" title="查询效果如图"></a>查询效果如图</h1><p><img src="http://ningyylin.top/image/bigdata/hive-create-table.png" alt></p>
+<h1 id="备选方案"><a href="#备选方案" class="headerlink" title="备选方案"></a>备选方案</h1><p>如果一定要用逗号(,)作为分隔符,请使用以下语句定义hive表</p>
+<h2 id="有转义符"><a href="#有转义符" class="headerlink" title="有转义符"></a>有转义符</h2><p>数据的逗号前面要有转义符(\)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">external</span> <span class="keyword">table</span> <span class="keyword">sample</span> (</span><br><span class="line">    vendor_nbr <span class="keyword">string</span>,</span><br><span class="line">    vendor_name <span class="keyword">string</span>,</span><br><span class="line">    vnpk_qty <span class="keyword">string</span>)</span><br><span class="line"><span class="keyword">row</span> <span class="keyword">format</span> <span class="keyword">delimited</span></span><br><span class="line"><span class="keyword">fields</span> <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">','</span> <span class="keyword">escaped</span> <span class="keyword">by</span> <span class="string">'\\'</span></span><br><span class="line"><span class="keyword">stored</span> <span class="keyword">as</span> textfile location <span class="string">'/example/lin/csv/'</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">111;Wuxi Demi Trading Co.\,Ltd.;12</span><br><span class="line">222;Jiangsu Jiyin Food Co.\,Ltd.;12</span><br><span class="line">333;Jiangsu Maileduo Technology Co.\,Ltd;22</span><br></pre></td></tr></table></figure>
 
 
+<h2 id="无转义符"><a href="#无转义符" class="headerlink" title="无转义符"></a>无转义符</h2><p>数据的逗号前面没有转义符(\)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">external</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> <span class="keyword">sample</span>(</span><br><span class="line">    vendor_nbr <span class="keyword">string</span>,</span><br><span class="line">    vendor_name <span class="keyword">string</span>,</span><br><span class="line">    vnpk_qty <span class="keyword">string</span>)</span><br><span class="line"><span class="keyword">row</span> <span class="keyword">format</span> SERDE <span class="string">'org.apache.hadoop.hive.contrib.serde2.RegexSerDe'</span> </span><br><span class="line"><span class="keyword">WITH</span> SERDEPROPERTIES (<span class="string">"input.regex"</span> = <span class="string">"(.*?),(.*),(.*)"</span>)</span><br><span class="line"><span class="keyword">stored</span> <span class="keyword">as</span> textfile location <span class="string">'/example/lin/csv/'</span>;</span><br></pre></td></tr></table></figure>
 
-<p><strong>本文作者</strong>：ningyylin<br><strong>本文地址</strong>： <a href="http://yoursite.com/2019/12/Hadoop数据倾斜问题定位/">http://yoursite.com/2019/12/Hadoop数据倾斜问题定位/</a> <br><strong>版权声明</strong>：转载请注明出处！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">111;Wuxi Demi Trading Co.,Ltd.;12</span><br><span class="line">222;Jiangsu Jiyin Food Co.,Ltd.;12</span><br><span class="line">333;Jiangsu Maileduo Technology Co.,Ltd;22</span><br></pre></td></tr></table></figure>
+
+<p><strong>本文作者</strong>：ningyylin<br><strong>本文地址</strong>： [<a href="http://yoursite.com/2020/1/Hive">http://yoursite.com/2020/1/Hive</a> 建表指定分号作为分隔符/](<a href="http://yoursite.com/2020/1/Hive">http://yoursite.com/2020/1/Hive</a> 建表指定分号作为分隔符/) <br><strong>版权声明</strong>：转载请注明出处！</p>
 
     </div>
 
@@ -303,24 +317,21 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Bigdata-Hdfs-Balance/" rel="tag"># Bigdata,Hdfs,Balance</a>
+              <a href="/tags/Hive/" rel="tag"># Hive</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/12/DW%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%88%86%E5%B1%82%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1/" rel="next" title="DW数据仓库分层模型设计">
-                  <i class="fa fa-chevron-left"></i> DW数据仓库分层模型设计
+                <a href="/2020/1/sed%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/" rel="next" title="sed命令笔记">
+                  <i class="fa fa-chevron-left"></i> sed命令笔记
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/12/Lambda%20%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" rel="prev" title="Lambda 体系架构">
-                  Lambda 体系架构 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
       </footer>
@@ -360,6 +371,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#原始数据样本"><span class="nav-number">1.</span> <span class="nav-text">原始数据样本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建hive表语句"><span class="nav-number">2.</span> <span class="nav-text">创建hive表语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询效果如图"><span class="nav-number">3.</span> <span class="nav-text">查询效果如图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#备选方案"><span class="nav-number">4.</span> <span class="nav-text">备选方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#有转义符"><span class="nav-number">4.1.</span> <span class="nav-text">有转义符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无转义符"><span class="nav-number">4.2.</span> <span class="nav-text">无转义符</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
