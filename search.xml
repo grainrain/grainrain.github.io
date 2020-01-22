@@ -20,10 +20,7 @@
 <h2 id="无转义符"><a href="#无转义符" class="headerlink" title="无转义符"></a>无转义符</h2><p>数据的逗号前面没有转义符(\)</p>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">external</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> <span class="keyword">sample</span>(</span><br><span class="line">    vendor_nbr <span class="keyword">string</span>,</span><br><span class="line">    vendor_name <span class="keyword">string</span>,</span><br><span class="line">    vnpk_qty <span class="keyword">string</span>)</span><br><span class="line"><span class="keyword">row</span> <span class="keyword">format</span> SERDE <span class="string">'org.apache.hadoop.hive.contrib.serde2.RegexSerDe'</span> </span><br><span class="line"><span class="keyword">WITH</span> SERDEPROPERTIES (<span class="string">"input.regex"</span> = <span class="string">"(.*?),(.*),(.*)"</span>)</span><br><span class="line"><span class="keyword">stored</span> <span class="keyword">as</span> textfile location <span class="string">'/example/lin/csv/'</span>;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">111;Wuxi Demi Trading Co.,Ltd.;12</span><br><span class="line">222;Jiangsu Jiyin Food Co.,Ltd.;12</span><br><span class="line">333;Jiangsu Maileduo Technology Co.,Ltd;22</span><br></pre></td></tr></table></figure>
-
-<p><strong>本文作者</strong>：dongsheng<br><strong>本文地址</strong>： [<a href="http://yoursite.com/2020/1/Hive">http://yoursite.com/2020/1/Hive</a> 建表指定分号作为分隔符/](<a href="http://yoursite.com/2020/1/Hive">http://yoursite.com/2020/1/Hive</a> 建表指定分号作为分隔符/) <br><strong>版权声明</strong>：转载请注明出处！</p>
-]]></content>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">111;Wuxi Demi Trading Co.,Ltd.;12</span><br><span class="line">222;Jiangsu Jiyin Food Co.,Ltd.;12</span><br><span class="line">333;Jiangsu Maileduo Technology Co.,Ltd;22</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Bigdata</category>
       </categories>
@@ -34,10 +31,7 @@
   <entry>
     <title>sed命令笔记</title>
     <url>/2020/1/sed%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sed -i <span class="string">'s/char/chara/g'</span> filename  <span class="comment">#这里是将filename的文件中所有的char替换为chara</span></span><br><span class="line">sed <span class="string">'/^$/d'</span> file  <span class="comment">#删除空白行</span></span><br><span class="line">sed <span class="string">'2d'</span> file  <span class="comment">#删除第二行</span></span><br><span class="line">sed <span class="string">'2,$d'</span> file  <span class="comment">#删除第二行到最后一行</span></span><br><span class="line">sed <span class="string">'$d'</span> file <span class="comment">#删除最后一行</span></span><br><span class="line">sed <span class="string">'/^test/'</span>d file <span class="comment">#删除开头为test的行</span></span><br><span class="line">sed -i <span class="string">'2a\this is a test line'</span> test.conf <span class="comment">#将this is a test line添加至第二行</span></span><br></pre></td></tr></table></figure><a id="more"></a>
-
-<p><strong>本文作者</strong>：dongsheng<br><strong>本文地址</strong>： <a href="http://yoursite.com/2020/1/sed命令笔记/">http://yoursite.com/2020/1/sed命令笔记/</a> <br><strong>版权声明</strong>：转载请注明出处！</p>
-]]></content>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sed -i <span class="string">'s/char/chara/g'</span> filename  <span class="comment">#这里是将filename的文件中所有的char替换为chara</span></span><br><span class="line">sed <span class="string">'/^$/d'</span> file  <span class="comment">#删除空白行</span></span><br><span class="line">sed <span class="string">'2d'</span> file  <span class="comment">#删除第二行</span></span><br><span class="line">sed <span class="string">'2,$d'</span> file  <span class="comment">#删除第二行到最后一行</span></span><br><span class="line">sed <span class="string">'$d'</span> file <span class="comment">#删除最后一行</span></span><br><span class="line">sed <span class="string">'/^test/'</span>d file <span class="comment">#删除开头为test的行</span></span><br><span class="line">sed -i <span class="string">'2a\this is a test line'</span> test.conf <span class="comment">#将this is a test line添加至第二行</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Linux</category>
       </categories>
@@ -49,9 +43,7 @@
   <entry>
     <title>你是普通人吗</title>
     <url>/2020/1/%E4%BD%A0%E6%98%AF%E6%99%AE%E9%80%9A%E4%BA%BA%E5%90%97%20/</url>
-    <content><![CDATA[<p>  &nbsp;&nbsp;&nbsp;&nbsp;最近听到一段对话，谈到人的智商真的是有差别的。听完之后，就想到另外一句话，就是我们很多人拼尽一生，也不过，让自己成为了一个普通人。你的生活阅历，你的经验，总结出来的一些话，一些人生哲理，但对于别人而言，它只是常识。<br>  &nbsp;&nbsp;&nbsp;&nbsp;中国的经济发展，速度比较快，不为生存而烦恼才能谈得上发展。这个过程有没有跨越式的，当然有。但毕竟是少部分人。绝大部分人，必须要经历为生存烦恼，到为发展而烦恼这个过程。<br>  &nbsp;&nbsp;&nbsp;&nbsp;通过二八定律，我们会发现一个问题，80%的人为生存而烦恼，没有资格为发展而烦恼。所以大部分年轻人，当然也包括我这种即将步入中年的人都是一样的，必须生命不息，奋斗不止。<br>  &nbsp;&nbsp;&nbsp;&nbsp;读了快20年的书，深感中国教育都是要学生守规矩，安分守己。守规矩的人基本上也都是平庸人和平常人，因为富贵险中求。这些年轻人，拼命的努力，最后获得的就是一个普通人。什么叫普通人，正常的普通人就是不为生存而烦恼。</p><a id="more"></a>
-<p><strong>本文作者</strong>：dongsheng<br><strong>本文地址</strong>： [<a href="http://yoursite.com/2020/1/你是普通人吗">http://yoursite.com/2020/1/你是普通人吗</a> /](<a href="http://yoursite.com/2020/1/你是普通人吗">http://yoursite.com/2020/1/你是普通人吗</a> /) <br><strong>版权声明</strong>：转载请注明出处！</p>
-]]></content>
+    <content><![CDATA[<p>  &nbsp;&nbsp;&nbsp;&nbsp;最近听到一段对话，谈到人的智商真的是有差别的。听完之后，就想到另外一句话，就是我们很多人拼尽一生，也不过，让自己成为了一个普通人。你的生活阅历，你的经验，总结出来的一些话，一些人生哲理，但对于别人而言，它只是常识。<br>  &nbsp;&nbsp;&nbsp;&nbsp;中国的经济发展，速度比较快，不为生存而烦恼才能谈得上发展。这个过程有没有跨越式的，当然有。但毕竟是少部分人。绝大部分人，必须要经历为生存烦恼，到为发展而烦恼这个过程。<br>  &nbsp;&nbsp;&nbsp;&nbsp;通过二八定律，我们会发现一个问题，80%的人为生存而烦恼，没有资格为发展而烦恼。所以大部分年轻人，当然也包括我这种即将步入中年的人都是一样的，必须生命不息，奋斗不止。<br>  &nbsp;&nbsp;&nbsp;&nbsp;读了快20年的书，深感中国教育都是要学生守规矩，安分守己。守规矩的人基本上也都是平庸人和平常人，因为富贵险中求。这些年轻人，拼命的努力，最后获得的就是一个普通人。什么叫普通人，正常的普通人就是不为生存而烦恼。</p>]]></content>
       <categories>
         <category>Life</category>
       </categories>
@@ -74,7 +66,6 @@
 <li>将获取的值传递给ETL动作</li>
 <li>ETL完毕调用存储过程，将最大LastModifyTimeValue和表名传递给存储过程，更新lastmodify_criteria_table</li>
 </ul>
-<p><strong>本文作者</strong>：dongsheng<br><strong>本文地址</strong>： <a href="http://yoursite.com/2020/1/增量从关系型数据库拉取数据/">http://yoursite.com/2020/1/增量从关系型数据库拉取数据/</a> <br><strong>版权声明</strong>：转载请注明出处！</p>
 ]]></content>
       <categories>
         <category>Bigdata</category>
@@ -87,7 +78,7 @@
   <entry>
     <title>Hadoop MapReduce Framework Architecture</title>
     <url>/2020/1/Hadoop%20MapReduce%20Framework%20Architecture%20/</url>
-    <content><![CDATA[<h2 id="Hadoop-MapReduce-Framework-Architecture"><a href="#Hadoop-MapReduce-Framework-Architecture" class="headerlink" title="Hadoop MapReduce Framework Architecture"></a>Hadoop MapReduce Framework Architecture</h2><p><img src="http://ningyylin.top/image/bigdata/Hadoop-MapReduce-Framework-Architecture.png" alt></p><p><strong>本文作者</strong>：dongsheng<br><strong>本文地址</strong>： [<a href="http://yoursite.com/2020/1/Hadoop">http://yoursite.com/2020/1/Hadoop</a> MapReduce Framework Architecture /](<a href="http://yoursite.com/2020/1/Hadoop">http://yoursite.com/2020/1/Hadoop</a> MapReduce Framework Architecture /) <br><strong>版权声明</strong>：转载请注明出处！</p>]]></content>
+    <content><![CDATA[<h2 id="Hadoop-MapReduce-Framework-Architecture"><a href="#Hadoop-MapReduce-Framework-Architecture" class="headerlink" title="Hadoop MapReduce Framework Architecture"></a>Hadoop MapReduce Framework Architecture</h2><p><img src="http://ningyylin.top/image/bigdata/Hadoop-MapReduce-Framework-Architecture.png" alt></p>]]></content>
       <categories>
         <category>Bigdata</category>
       </categories>
@@ -110,7 +101,6 @@
 <li>速度层补偿处理时间（针对服务层），只处理最新的数据。</li>
 <li>通过合并批处理视图和实时视图中的结果或者单独 ping 每个结果，可以应答所有查询。</li>
 </ol>
-<p><strong>本文作者</strong>：dongsheng<br><strong>本文地址</strong>： [<a href="http://yoursite.com/2019/12/Lambda">http://yoursite.com/2019/12/Lambda</a> 体系结构/](<a href="http://yoursite.com/2019/12/Lambda">http://yoursite.com/2019/12/Lambda</a> 体系结构/) <br><strong>版权声明</strong>：转载请注明出处！</p>
 ]]></content>
       <categories>
         <category>Bigdata</category>
@@ -122,15 +112,7 @@
   <entry>
     <title>Hadoop数据倾斜问题定位</title>
     <url>/2019/12/Hadoop%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D/</url>
-    <content><![CDATA[<p>Hadoop集群Datanode数据倾斜，部分节点hdfs空间使用率达到90%以上，于是新增Datenode节点，并进行balance操作。</p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sh start-balancer.sh -threshold 5</span><br></pre></td></tr></table></figure><p>如果需要提高blance的速度，将默认的balance速度从1MB/s增大到50MB/s</p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">set</span> balance to 50M/s</span></span><br><span class="line">hdfs dfsadmin -setBalancerBandwidth 52428800</span><br></pre></td></tr></table></figure><a id="more"></a>
-
-
-
-
-
-
-<p><strong>本文作者</strong>：dongsheng<br><strong>本文地址</strong>： <a href="http://yoursite.com/2019/12/Hadoop数据倾斜问题定位/">http://yoursite.com/2019/12/Hadoop数据倾斜问题定位/</a> <br><strong>版权声明</strong>：转载请注明出处！</p>
-]]></content>
+    <content><![CDATA[<p>Hadoop集群Datanode数据倾斜，部分节点hdfs空间使用率达到90%以上，于是新增Datenode节点，并进行balance操作。</p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sh start-balancer.sh -threshold 5</span><br></pre></td></tr></table></figure><p>如果需要提高blance的速度，将默认的balance速度从1MB/s增大到50MB/s</p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">set</span> balance to 50M/s</span></span><br><span class="line">hdfs dfsadmin -setBalancerBandwidth 52428800</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Bigdata</category>
       </categories>
@@ -141,7 +123,7 @@
   <entry>
     <title>DW数据仓库分层模型设计</title>
     <url>/2019/12/DW%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%88%86%E5%B1%82%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1/</url>
-    <content><![CDATA[<h2 id="DW模型"><a href="#DW模型" class="headerlink" title="DW模型"></a>DW模型</h2><p><img src="http://ningyylin.top/image/bigdata/DW.png" alt></p><p><strong>本文作者</strong>：dongsheng<br><strong>本文地址</strong>： <a href="http://yoursite.com/2019/12/DW数据仓库分层模型设计/">http://yoursite.com/2019/12/DW数据仓库分层模型设计/</a> <br><strong>版权声明</strong>：转载请注明出处！</p>]]></content>
+    <content><![CDATA[<h2 id="DW模型"><a href="#DW模型" class="headerlink" title="DW模型"></a>DW模型</h2><p><img src="http://ningyylin.top/image/bigdata/DW.png" alt></p>]]></content>
       <categories>
         <category>Bigdata</category>
       </categories>
@@ -226,7 +208,6 @@
 <p>它需要说明以下几个事项:</p>
 <p>软件定位，软件的基本功能。<br>运行代码的方法: 安装环境、启动命令等。<br>简要的使用说明。<br>代码目录结构说明，更详细点可以说明软件的基本原理。<br>常见问题说明。<br>有以上几点是比较好的一个README。在软件开发初期，由于开发过程中以上内容可能不明确或者发生变化，并不是一定要在一开始就将所有信息都补全。但是在项目完结的时候，是需要撰写这样的一个文档的。</p>
 <p>可以参考Redis源码中<a href="https://github.com/antirez/redis#what-is-redis" target="_blank" rel="noopener" title="Readme">Readme</a>的写法，这里面简洁但是清晰的描述了Redis功能和源码结构。</p>
-<p><strong>本文作者</strong>：dongsheng<br><strong>本文地址</strong>： <a href="http://yoursite.com/2019/11/Python学习-Day4/">http://yoursite.com/2019/11/Python学习-Day4/</a> <br><strong>版权声明</strong>：转载请注明出处！</p>
 ]]></content>
       <categories>
         <category>Python</category>
@@ -250,7 +231,7 @@
 <li>高阶函数</li>
 <li>内置函数</li>
 </ol>
-</blockquote><p><strong>本文作者</strong>：dongsheng<br><strong>本文地址</strong>： [<a href="http://yoursite.com/2019/11/Python学习-Day3">http://yoursite.com/2019/11/Python学习-Day3</a> /](<a href="http://yoursite.com/2019/11/Python学习-Day3">http://yoursite.com/2019/11/Python学习-Day3</a> /) <br><strong>版权声明</strong>：转载请注明出处！</p>]]></content>
+</blockquote>]]></content>
       <categories>
         <category>Python</category>
       </categories>
@@ -348,11 +329,8 @@
 <li><p>2.unicode 分为 utf-32(占4个字节),utf-16(占两个字节)，utf-8(占1-4个字节)， so utf-16就是现在最常用的unicode版本， 不过在文件里存的还是utf-8，因为utf8省空间</p>
 </li>
 <li><p>3.在py3中encode,在转码的同时还会把string 变成bytes类型，decode在解码的同时还会把bytes变回string</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(sys.getdefaultencoding())</span><br><span class="line"></span><br><span class="line">msg = <span class="string">"我爱北京天安门"</span></span><br><span class="line"><span class="comment">#msg_gb2312 = msg.decode("utf-8").encode("gb2312")</span></span><br><span class="line">msg_gb2312 = msg.encode(<span class="string">"gb2312"</span>) <span class="comment">#python3默认就是unicode,不用再decode,喜大普奔</span></span><br><span class="line">gb2312_to_unicode = msg_gb2312.decode(<span class="string">"gb2312"</span>)</span><br><span class="line">gb2312_to_utf8 = msg_gb2312.decode(<span class="string">"gb2312"</span>).encode(<span class="string">"utf-8"</span>)</span><br><span class="line"></span><br><span class="line">print(msg)</span><br><span class="line">print(msg_gb2312)</span><br><span class="line">print(gb2312_to_unicode)</span><br><span class="line">print(gb2312_to_utf8)</span><br></pre></td></tr></table></figure>
-
-</li>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(sys.getdefaultencoding())</span><br><span class="line"></span><br><span class="line">msg = <span class="string">"我爱北京天安门"</span></span><br><span class="line"><span class="comment">#msg_gb2312 = msg.decode("utf-8").encode("gb2312")</span></span><br><span class="line">msg_gb2312 = msg.encode(<span class="string">"gb2312"</span>) <span class="comment">#python3默认就是unicode,不用再decode,喜大普奔</span></span><br><span class="line">gb2312_to_unicode = msg_gb2312.decode(<span class="string">"gb2312"</span>)</span><br><span class="line">gb2312_to_utf8 = msg_gb2312.decode(<span class="string">"gb2312"</span>).encode(<span class="string">"utf-8"</span>)</span><br><span class="line"></span><br><span class="line">print(msg)</span><br><span class="line">print(msg_gb2312)</span><br><span class="line">print(gb2312_to_unicode)</span><br><span class="line">print(gb2312_to_utf8)</span><br></pre></td></tr></table></figure></li>
 </ul>
-<p><strong>本文作者</strong>：dongsheng<br><strong>本文地址</strong>： <a href="http://yoursite.com/2019/11/Python学习-Day2/">http://yoursite.com/2019/11/Python学习-Day2/</a> <br><strong>版权声明</strong>：转载请注明出处！</p>
 ]]></content>
       <categories>
         <category>Python</category>
@@ -443,10 +421,7 @@
 <h2 id="七、表达式if-else"><a href="#七、表达式if-else" class="headerlink" title="七、表达式if  else"></a>七、表达式if  else</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 验证用户名和密码</span></span><br><span class="line"><span class="comment">#     如果错误，则输出用户名或密码错误</span></span><br><span class="line"><span class="comment">#     如果成功，则输出 欢迎，XXX!</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: encoding -*-</span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> getpass</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">name = raw_input(<span class="string">'请输入用户名：'</span>)</span><br><span class="line">pwd = getpass.getpass(<span class="string">'请输入密码：'</span>)</span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span> name == <span class="string">"alex"</span> <span class="keyword">and</span> pwd == <span class="string">"cmd"</span>:</span><br><span class="line">    print(<span class="string">"欢迎，alex！"</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">"用户名和密码错误"</span>)</span><br></pre></td></tr></table></figure>
 <h2 id="八、表达式for-循环"><a href="#八、表达式for-循环" class="headerlink" title="八、表达式for 循环"></a>八、表达式for 循环</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#_*_coding:utf-8_*_</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    print(<span class="string">"loop:"</span>, i )</span><br></pre></td></tr></table></figure>
 
-<h2 id="九、while-loop"><a href="#九、while-loop" class="headerlink" title="九、while loop"></a>九、while loop</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#_*_coding:utf-8_*_</span></span><br><span class="line"> </span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    print(<span class="string">"dead loop..."</span>,count)</span><br><span class="line">    count +=<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>本文作者</strong>：dongsheng<br><strong>本文地址</strong>： <a href="http://yoursite.com/2019/11/Python学习-Day1/">http://yoursite.com/2019/11/Python学习-Day1/</a> <br><strong>版权声明</strong>：转载请注明出处！</p>
-]]></content>
+<h2 id="九、while-loop"><a href="#九、while-loop" class="headerlink" title="九、while loop"></a>九、while loop</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#_*_coding:utf-8_*_</span></span><br><span class="line"> </span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    print(<span class="string">"dead loop..."</span>,count)</span><br><span class="line">    count +=<span class="number">1</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Python</category>
       </categories>
@@ -458,15 +433,7 @@
   <entry>
     <title>pip设置阿里云的镜像源</title>
     <url>/2019/11/pip%E8%AE%BE%E7%BD%AE%E9%98%BF%E9%87%8C%E4%BA%91%E7%9A%84%E9%95%9C%E5%83%8F%E6%BA%90/</url>
-    <content><![CDATA[<h2 id="1-Linux配置路径"><a href="#1-Linux配置路径" class="headerlink" title="1.Linux配置路径"></a>1.Linux配置路径</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vi ~/.pip/pip.conf</span><br></pre></td></tr></table></figure><h2 id="2-Windows配置路径"><a href="#2-Windows配置路径" class="headerlink" title="2.Windows配置路径"></a>2.Windows配置路径</h2><p>如果没有pip文件夹,那么新建pip</p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash">HOMEPATH%\pip\pip.ini</span></span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[global]  </span><br><span class="line">index-url=http://mirrors.aliyun.com/pypi/simple/  </span><br><span class="line">[install]  </span><br><span class="line">trusted-host=mirrors.aliyun.com</span><br></pre></td></tr></table></figure><a id="more"></a>
-
-
-
-
-
-
-<p><strong>本文作者</strong>：dongsheng<br><strong>本文地址</strong>： <a href="http://yoursite.com/2019/11/pip设置阿里云的镜像源/">http://yoursite.com/2019/11/pip设置阿里云的镜像源/</a> <br><strong>版权声明</strong>：转载请注明出处！</p>
-]]></content>
+    <content><![CDATA[<h2 id="1-Linux配置路径"><a href="#1-Linux配置路径" class="headerlink" title="1.Linux配置路径"></a>1.Linux配置路径</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vi ~/.pip/pip.conf</span><br></pre></td></tr></table></figure><h2 id="2-Windows配置路径"><a href="#2-Windows配置路径" class="headerlink" title="2.Windows配置路径"></a>2.Windows配置路径</h2><p>如果没有pip文件夹,那么新建pip</p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash">HOMEPATH%\pip\pip.ini</span></span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[global]  </span><br><span class="line">index-url=http://mirrors.aliyun.com/pypi/simple/  </span><br><span class="line">[install]  </span><br><span class="line">trusted-host=mirrors.aliyun.com</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Python</category>
       </categories>
@@ -502,7 +469,6 @@ IdentityFile ~/.ssh/id_rsa.github
 <h2 id="5-测试是否连接成功"><a href="#5-测试是否连接成功" class="headerlink" title="5.测试是否连接成功"></a>5.测试是否连接成功</h2><pre><code class="shell">ssh -T git@github.com
 ssh -T  git@gitLab-host
 ssh -T git@gitee.com</code></pre>
-<p><strong>本文作者</strong>：dongsheng<br><strong>本文地址</strong>： <a href="http://yoursite.com/2019/11/Git多账号配置/">http://yoursite.com/2019/11/Git多账号配置/</a> <br><strong>版权声明</strong>：转载请注明出处！</p>
 ]]></content>
       <categories>
         <category>Git</category>
@@ -529,10 +495,7 @@ ssh -T git@gitee.com</code></pre>
 
 <p>扩展：</p>
 <p>firewalld的命令</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">运行、停止、禁用firewalld</span><br><span class="line">启动：# systemctl start firewalld</span><br><span class="line">重启：# systemctl restart firewalld</span><br><span class="line">查看状态：# systemctl status firewalld 或者 firewall-cmd --state</span><br><span class="line">停止：# systemctl disable firewalld</span><br><span class="line">禁用：# systemctl stop firewalld</span><br><span class="line">配置firewalld</span><br><span class="line">查看版本：$ firewall-cmd --version</span><br><span class="line">查看帮助：$ firewall-cmd --help</span><br><span class="line">显示状态：$ firewall-cmd --state</span><br><span class="line">查看区域信息: $ firewall-cmd --get-active-zones</span><br><span class="line">查看指定接口所属区域：$ firewall-cmd --get-zone-of-interface=eth0</span><br><span class="line">拒绝所有包：# firewall-cmd --panic-on</span><br><span class="line">取消拒绝状态：# firewall-cmd --panic-off</span><br><span class="line">查看是否拒绝：$ firewall-cmd --query-panic</span><br><span class="line">更新防火墙规则：</span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --reload</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --complete-reload</span></span><br><span class="line">两者的区别就是第一个无需断开连接，就是firewalld特性之一动态添加规则，第二个需要断开连接，类似重启服务</span><br><span class="line">将接口添加到区域，默认接口都在public</span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --zone=public --add-interface=eth0</span></span><br><span class="line">永久生效再加上 --permanent 然后reload防火墙</span><br><span class="line">设置默认接口区域</span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --<span class="built_in">set</span>-default-zone=public</span></span><br><span class="line">立即生效无需重启</span><br><span class="line">打开端口（貌似这个才最常用）</span><br><span class="line">查看所有打开的端口：</span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --zone=dmz --list-ports</span></span><br><span class="line">加入一个端口到区域：</span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --zone=dmz --add-port=8080/tcp</span></span><br><span class="line">若要永久生效方法同上</span><br><span class="line">打开一个服务，类似于将端口可视化，服务需要在配置文件中添加，/etc/firewalld 目录下有services文件夹，这个不详细说了，详情参考文档</span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --zone=work --add-service=smtp</span></span><br><span class="line">移除服务</span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --zone=work --remove-service=smtp</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>本文作者</strong>：dongsheng<br><strong>本文地址</strong>： [<a href="http://yoursite.com/2019/11/解决Vultr">http://yoursite.com/2019/11/解决Vultr</a> CentOS7主机禁用80端口的问题/](<a href="http://yoursite.com/2019/11/解决Vultr">http://yoursite.com/2019/11/解决Vultr</a> CentOS7主机禁用80端口的问题/) <br><strong>版权声明</strong>：转载请注明出处！</p>
-]]></content>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">运行、停止、禁用firewalld</span><br><span class="line">启动：# systemctl start firewalld</span><br><span class="line">重启：# systemctl restart firewalld</span><br><span class="line">查看状态：# systemctl status firewalld 或者 firewall-cmd --state</span><br><span class="line">停止：# systemctl disable firewalld</span><br><span class="line">禁用：# systemctl stop firewalld</span><br><span class="line">配置firewalld</span><br><span class="line">查看版本：$ firewall-cmd --version</span><br><span class="line">查看帮助：$ firewall-cmd --help</span><br><span class="line">显示状态：$ firewall-cmd --state</span><br><span class="line">查看区域信息: $ firewall-cmd --get-active-zones</span><br><span class="line">查看指定接口所属区域：$ firewall-cmd --get-zone-of-interface=eth0</span><br><span class="line">拒绝所有包：# firewall-cmd --panic-on</span><br><span class="line">取消拒绝状态：# firewall-cmd --panic-off</span><br><span class="line">查看是否拒绝：$ firewall-cmd --query-panic</span><br><span class="line">更新防火墙规则：</span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --reload</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --complete-reload</span></span><br><span class="line">两者的区别就是第一个无需断开连接，就是firewalld特性之一动态添加规则，第二个需要断开连接，类似重启服务</span><br><span class="line">将接口添加到区域，默认接口都在public</span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --zone=public --add-interface=eth0</span></span><br><span class="line">永久生效再加上 --permanent 然后reload防火墙</span><br><span class="line">设置默认接口区域</span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --<span class="built_in">set</span>-default-zone=public</span></span><br><span class="line">立即生效无需重启</span><br><span class="line">打开端口（貌似这个才最常用）</span><br><span class="line">查看所有打开的端口：</span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --zone=dmz --list-ports</span></span><br><span class="line">加入一个端口到区域：</span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --zone=dmz --add-port=8080/tcp</span></span><br><span class="line">若要永久生效方法同上</span><br><span class="line">打开一个服务，类似于将端口可视化，服务需要在配置文件中添加，/etc/firewalld 目录下有services文件夹，这个不详细说了，详情参考文档</span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --zone=work --add-service=smtp</span></span><br><span class="line">移除服务</span><br><span class="line"><span class="meta">#</span><span class="bash"> firewall-cmd --zone=work --remove-service=smtp</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Linux</category>
       </categories>
@@ -600,7 +563,6 @@ ssh -T git@gitee.com</code></pre>
 
 <p>修改后重启supervisor进程，在浏览器访问 http://<host-ip>:9001</host-ip></p>
 <p>参考：<br><a href="http://supervisord.org/" target="_blank" rel="noopener">http://supervisord.org/</a><br><a href="https://blog.csdn.net/huwh_/article/details/80497790" target="_blank" rel="noopener">https://blog.csdn.net/huwh_/article/details/80497790</a></p>
-<p><strong>本文作者</strong>：dongsheng<br><strong>本文地址</strong>： <a href="http://yoursite.com/2019/11/Supervisor使用/">http://yoursite.com/2019/11/Supervisor使用/</a> <br><strong>版权声明</strong>：转载请注明出处！</p>
 ]]></content>
       <categories>
         <category>Linux</category>
@@ -627,10 +589,7 @@ ssh -T git@gitee.com</code></pre>
 <p>4.检查是否安装成功，命令：node -v,npm -v</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line"></span><br><span class="line">v12.13.0</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm -v</span><br><span class="line"></span><br><span class="line">6.12.0</span><br></pre></td></tr></table></figure>
-
-<p><strong>本文作者</strong>：dongsheng<br /><strong>本文地址</strong>： <a href="http://yoursite.com/2019/10/Linux系统安装Nodejs/">http://yoursite.com/2019/10/Linux系统安装Nodejs/</a> <br /><strong>版权声明</strong>：转载请注明出处！</p>
-]]></content>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm -v</span><br><span class="line"></span><br><span class="line">6.12.0</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Web</category>
       </categories>
@@ -641,14 +600,7 @@ ssh -T git@gitee.com</code></pre>
   <entry>
     <title>Github快速上传项目</title>
     <url>/2018/1/Github%E5%BF%AB%E9%80%9F%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<p>1、在github上创建项目</p><p>2、使用git clone -b xxx  <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:grainrain/xxx.git c:\xxx 克隆到本地</p><p>3、编辑项目</p><p>4、git add . （将改动添加到暂存区）</p><p>5、git commit -m “提交说明”</p><p>6、git push origin master 将本地更改推送到远程master分支。</p><a id="more"></a>
-
-
-
-
-
-<p><strong>本文作者</strong>：dongsheng<br><strong>本文地址</strong>： <a href="http://yoursite.com/2018/1/Github快速上传项目/">http://yoursite.com/2018/1/Github快速上传项目/</a> <br><strong>版权声明</strong>：转载请注明出处！</p>
-]]></content>
+    <content><![CDATA[<p>1、在github上创建项目</p><p>2、使用git clone -b xxx  <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:grainrain/xxx.git c:\xxx 克隆到本地</p><p>3、编辑项目</p><p>4、git add . （将改动添加到暂存区）</p><p>5、git commit -m “提交说明”</p><p>6、git push origin master 将本地更改推送到远程master分支。</p>]]></content>
       <categories>
         <category>Github</category>
       </categories>
