@@ -56,14 +56,14 @@
 <meta name="keywords" content="Bigdata,Hdfs,Balance">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hadoop数据倾斜问题定位">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;Hadoop%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D&#x2F;index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;ningyylin.top&#x2F;2019&#x2F;12&#x2F;Hadoop%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D&#x2F;index.html">
 <meta property="og:site_name" content="林 | JASON">
 <meta property="og:description" content="Hadoop集群Datanode数据倾斜，部分节点hdfs空间使用率达到90%以上，于是新增Datenode节点，并进行balance操作。1sh start-balancer.sh -threshold 5如果需要提高blance的速度，将默认的balance速度从1MB&#x2F;s增大到50MB&#x2F;s12#set balance to 50M&#x2F;shdfs dfsadmin -setBalancerBan">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-12-23T02:03:41.000Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2019/12/Hadoop%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D/">
+<link rel="canonical" href="http://ningyylin.top/2019/12/Hadoop%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D/">
 
 
 <script id="page-configurations">
@@ -216,7 +216,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/Hadoop%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D/">
+    <link itemprop="mainEntityOfPage" href="http://ningyylin.top/2019/12/Hadoop%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -292,6 +292,23 @@
     
     
     
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Yongyi Lin
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://ningyylin.top/2019/12/Hadoop%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D/" title="Hadoop数据倾斜问题定位">http://ningyylin.top/2019/12/Hadoop%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
 
       <footer class="post-footer">
           <div class="post-tags">
