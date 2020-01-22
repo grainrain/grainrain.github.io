@@ -286,7 +286,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Hadoop集群Datanode数据倾斜，部分节点hdfs空间使用率达到90%以上，于是新增Datenode节点，并进行balance操作。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh start-balancer.sh -threshold 5</span><br></pre></td></tr></table></figure><p>如果需要提高blance的速度，将默认的balance速度从1MB/s增大到50MB/s</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">set</span> balance to 50M/s</span></span><br><span class="line">hdfs dfsadmin -setBalancerBandwidth 52428800</span><br></pre></td></tr></table></figure>
+        <p>Hadoop集群Datanode数据倾斜，部分节点hdfs空间使用率达到90%以上，于是新增Datenode节点，并进行balance操作。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh start-balancer.sh -threshold 5</span><br></pre></td></tr></table></figure><p>如果需要提高blance的速度，将默认的balance速度从1MB/s增大到50MB/s</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">set</span> balance to 50M/s</span></span><br><span class="line">hdfs dfsadmin -setBalancerBandwidth 52428800</span><br></pre></td></tr></table></figure><a id="more"></a>
+
+
+
+
+
+
+<p><strong>本文作者</strong>：dongsheng<br><strong>本文地址</strong>： <a href="http://yoursite.com/2019/12/Hadoop数据倾斜问题定位/">http://yoursite.com/2019/12/Hadoop数据倾斜问题定位/</a> <br><strong>版权声明</strong>：转载请注明出处！</p>
+
     </div>
 
     
